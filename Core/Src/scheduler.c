@@ -17,8 +17,6 @@ static uint32_t Error_tick_count_G = 0;
 
 static sTask SCH_tasks_G[SCH_MAX_TASKS];
 static uint32_t nextTaskID = 1;
-extern volatile uint32_t system_time_ms;
-extern volatile uint32_t snapshot_time_ms;
 
 void SCH_Go_To_Sleep(void) {
 	 __WFI();
@@ -39,12 +37,15 @@ void SCH_Init(void) {
 
 
 
-// Add Task
+// Add Task (PRIMASK guard: safe to call from task body, ISR, or nested)
 uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
+    uint32_t primask = __get_PRIMASK();
+    __disable_irq();
 
 	//Check error
 	if (SCH_tasks_G[SCH_MAX_TASKS - 1].pTask != 0) {
 	        Error_code_G = ERROR_SCH_TOO_MANY_TASKS;
+	        __set_PRIMASK(primask);
 	        return NO_TASK_ID;
 	    }
 
@@ -56,7 +57,7 @@ uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
             break;
         }
     }
-    if (index == -1) return 0; // No empty
+    if (index == -1) { __set_PRIMASK(primask); return 0; } // No empty
 
 
     // Find insert position
@@ -97,14 +98,17 @@ uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
             	            SCH_tasks_G[insert_pos + 1].RunMe = 0;
             	        }
 
+            	        __set_PRIMASK(primask);
             	        return SCH_tasks_G[insert_pos].TaskID;
         }
 
+                // FIX: set RunMe = 1 if task lands at head (index==0) with Delay == 0
                 SCH_tasks_G[index].pTask = pFunction;
                 SCH_tasks_G[index].Delay = DELAY - accumulative_delay;
                 SCH_tasks_G[index].Period = PERIOD;
-                SCH_tasks_G[index].RunMe = 0;
+                SCH_tasks_G[index].RunMe = (index == 0 && (DELAY - accumulative_delay) == 0) ? 1 : 0;
                 SCH_tasks_G[index].TaskID = nextTaskID++;
+                __set_PRIMASK(primask);
                 return SCH_tasks_G[index].TaskID;
 }
 
@@ -150,16 +154,14 @@ void SCH_Update(void) {
 
 
 
+// Critical sections are now inside SCH_Add_Task / SCH_Delete_Task (PRIMASK guard),
+// so SCH_Dispatch_Tasks no longer needs its own __disable_irq / __enable_irq.
+// This also makes it safe for task bodies to call SCH_Add_Task / SCH_Delete_Task.
 void SCH_Dispatch_Tasks(void) {
-	if (SCH_tasks_G[0].pTask != 0 && (SCH_tasks_G[0].RunMe > 0 || SCH_tasks_G[0].Delay == 0)) {
-	   snapshot_time_ms = system_time_ms; // Capture time
+    void (*due_tasks[SCH_MAX_TASKS])(void); //Temp task array
+    int count = 0;
 
-	   void (*due_tasks[SCH_MAX_TASKS])(void); //Temp task array
-	   int count = 0;
-
-
-    // Find task flagged (or delay has come)
-    while (SCH_tasks_G[0].pTask != 0 && (SCH_tasks_G[0].RunMe > 0 || SCH_tasks_G[0].Delay == 0)) {
+    while (SCH_tasks_G[0].pTask != 0 && SCH_tasks_G[0].RunMe > 0) {
         void (*pFunc)() = SCH_tasks_G[0].pTask;
         uint32_t period = SCH_tasks_G[0].Period;
         uint32_t taskID = SCH_tasks_G[0].TaskID;
@@ -173,24 +175,30 @@ void SCH_Dispatch_Tasks(void) {
         }
 
         due_tasks[count++] = pFunc;
-            }
-    	//Run
-            for (int i = 0; i < count; i++) {
-                (*due_tasks[i])();
-            }
-}
-	SCH_Go_To_Sleep();
+    }
+
+    // Run tasks — interrupts are enabled, task bodies may call SCH_Add/Delete safely
+    for (int i = 0; i < count; i++) {
+        (*due_tasks[i])();
+    }
+
+    SCH_Go_To_Sleep();
 }
 
 
 uint8_t SCH_Delete_Task(uint32_t taskID) {
+    uint32_t primask = __get_PRIMASK();
+    __disable_irq();
+
 	//Check error
 	if (taskID == NO_TASK_ID) {
 	        Error_code_G = ERROR_SCH_CANNOT_DELETE_TASK;
+	        __set_PRIMASK(primask);
 	        return RETURN_ERROR;
 	    }
 
-	if (taskID == 0) return 0;
+    // FIX: Removed dead code 'if (taskID == 0) return 0;' (NO_TASK_ID == 0, already handled above)
+
     int delete_index = -1;
     // Find task ID
     for (int i = 0; i < SCH_MAX_TASKS; i++) {
@@ -203,6 +211,7 @@ uint8_t SCH_Delete_Task(uint32_t taskID) {
     // Not found -> Error
     if (delete_index == -1) {
             Error_code_G = ERROR_SCH_CANNOT_DELETE_TASK;
+            __set_PRIMASK(primask);
             return RETURN_ERROR;
         }
 
@@ -228,5 +237,6 @@ uint8_t SCH_Delete_Task(uint32_t taskID) {
             SCH_tasks_G[0].RunMe = 1;
         }
 
+    __set_PRIMASK(primask);
     return RETURN_NORMAL;
 }
