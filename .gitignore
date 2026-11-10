@@ -6,3 +6,10 @@ Release/
 *.map
 *.su
 .metadata/
+
+CMakeLists.txt
+CMakePresets.json
+stm32cubeide-export.json
+.vscode/
+cmake/
+.settings/
