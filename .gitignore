@@ -9,7 +9,14 @@ Release/
 
 CMakeLists.txt
 CMakePresets.json
+CMakeUserPresets.json
 stm32cubeide-export.json
 .vscode/
 cmake/
-.settings/
+.settings/bundles-lock.store.json
+.settings/bundles.store.json
+.settings/ide.store.json
+build/
+.cache/
+.clangd
+startup_stm32f103xb.s
