@@ -12,7 +12,7 @@
 
 #define LCD_COLS          16
 #define LCD_ROWS          2
-#define LCD_DEFAULT_ADDR  0x27   /* dia chi 7-bit: SUA theo ket qua I2C scan (Buoc 3.4) */
+#define LCD_DEFAULT_ADDR  0x21   /* dia chi 7-bit: SUA theo ket qua I2C scan (Buoc 3.4) */
 
 /* Goi 1 lan trong main(), TRUOC khi bat timer/scheduler (co dung HAL_Delay). */
 void    lcd_init(I2C_HandleTypeDef *hi2c, uint8_t addr7);

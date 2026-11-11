@@ -22,7 +22,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "scheduler.h"
+#include "traffic_light.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -40,22 +42,70 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
+I2C_HandleTypeDef hi2c1;
+
+TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-
+uint8_t found[8] = {0}; // Lưu địa chỉ I2C tìm được (Mục 3.4)
+int n = 0;              // Số lượng thiết bị I2C tìm thấy
+uint8_t btn_raw[5] = {0}; // Lưu mức logic (0 hoặc 1) của 5 nút nhấn (Mục 3.3)
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_USART2_UART_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+/* === Traffic Light Test ===
+ * Road 1: cycles RED -> GREEN -> AMBER -> OFF (2s each)
+ * Road 2: cycles GREEN -> AMBER -> RED -> OFF (2s each, offset)
+ * This verifies all 4 states on both roads.
+ */
+static const TrafficLightState test_seq_road1[] = { TL_RED, TL_GREEN, TL_AMBER, TL_OFF };
+static const TrafficLightState test_seq_road2[] = { TL_GREEN, TL_AMBER, TL_RED, TL_OFF };
+static uint8_t test_index = 0;
+
+void traffic_test_cycle(void) {
+    traffic_set(1, test_seq_road1[test_index]);
+    traffic_set(2, test_seq_road2[test_index]);
+    test_index = (test_index + 1) % 4;
+}
+
+/* === Button Test ===
+ * Btn 0 (D7): short press -> toggle LED PA5 (Flashing)
+ * Btn 1 (D8): short press -> toggle LED PC9 (Built_IN_LED)
+ * Btn 2 (D9): short press -> cycle Road 1 state
+ * Btn 3 (D10): short press -> cycle Road 2 state
+ * B1 (on-board): long press -> turn OFF both roads
+ */
+void button_test_task(void) {
+    if (is_button_pressed(0)) {
+        HAL_GPIO_TogglePin(Flashing_GPIO_Port, Flashing_Pin);
+    }
+    if (is_button_pressed(1)) {
+        HAL_GPIO_TogglePin(Built_IN_LED_GPIO_Port, Built_IN_LED_Pin);
+    }
+    if (is_button_pressed(2)) {
+        TrafficLightState s = (traffic_get(1) + 1) % 4;
+        traffic_set(1, s);
+    }
+    if (is_button_pressed(3)) {
+        TrafficLightState s = (traffic_get(2) + 1) % 4;
+        traffic_set(2, s);
+    }
+    if (is_button_long_pressed(4)) {
+        traffic_set(1, TL_OFF);
+        traffic_set(2, TL_OFF);
+    }
+}
 
 /* USER CODE END 0 */
 
@@ -87,19 +137,54 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_UART_Init();
+  MX_I2C1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  // 1. Kiểm tra 2 LED Built-in (PA5 và PC9): Chớp tắt 3 lần khi khởi động
+    for (int i = 0; i < 6; i++) {
+        HAL_GPIO_TogglePin(Flashing_GPIO_Port, Flashing_Pin);
+        HAL_GPIO_TogglePin(Built_IN_LED_GPIO_Port, Built_IN_LED_Pin);
+        HAL_Delay(250);
+    }
+    HAL_GPIO_WritePin(Flashing_GPIO_Port, Flashing_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(Built_IN_LED_GPIO_Port, Built_IN_LED_Pin, GPIO_PIN_RESET);
 
+    // 2. Quét thiết bị I2C (Mục 3.4): Tìm địa chỉ của DHT20 và LCD
+    for (uint8_t addr = 1; addr < 128; addr++) {
+        if (HAL_I2C_IsDeviceReady(&hi2c1, addr << 1, 1, 10) == HAL_OK) {
+            if (n < 8) {
+                found[n++] = addr;
+            }
+        }
+    }
+    // �?ẶT BREAKPOINT TẠI DÒNG DƯỚI �?ÂY �?Ể XEM MẢNG found[] VÀ BIẾN n
+    HAL_Delay(100);
+
+    // 3. Scheduler + Module Init
+    HAL_TIM_Base_Start_IT(&htim2);
+    SCH_Init();
+    traffic_light_init();
+    button_init();
+
+    // Task 1: Button debounce reading every 10ms (period = 1 tick)
+    SCH_Add_Task(button_reading, 0, 1);
+
+    // Task 2: Button test - check press flags every 10ms
+    SCH_Add_Task(button_test_task, 0, 1);
+
+    // Task 3: Traffic light auto-cycle every 2s (200 ticks)
+    SCH_Add_Task(traffic_test_cycle, 0, 200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+    while (1)
+      {
+        SCH_Dispatch_Tasks();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+      }
   /* USER CODE END 3 */
 }
 
@@ -120,7 +205,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI_DIV2;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL16;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -134,42 +219,88 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
 }
 
 /**
-  * @brief USART2 Initialization Function
+  * @brief I2C1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(void)
+static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN USART2_Init 0 */
+  /* USER CODE BEGIN I2C1_Init 0 */
 
-  /* USER CODE END USART2_Init 0 */
+  /* USER CODE END I2C1_Init 0 */
 
-  /* USER CODE BEGIN USART2_Init 1 */
+  /* USER CODE BEGIN I2C1_Init 1 */
 
-  /* USER CODE END USART2_Init 1 */
-  huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
-  huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  huart2.Init.StopBits = UART_STOPBITS_1;
-  huart2.Init.Parity = UART_PARITY_NONE;
-  huart2.Init.Mode = UART_MODE_TX_RX;
-  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart2) != HAL_OK)
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.ClockSpeed = 100000;
+  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART2_Init 2 */
+  /* USER CODE BEGIN I2C1_Init 2 */
 
-  /* USER CODE END USART2_Init 2 */
+  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 7999;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 9;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
 
 }
 
@@ -189,7 +320,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Flashing_GPIO_Port, Flashing_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, LED2_2_Pin|LED1_1_Pin|LED2_1_Pin|LED1_2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(Built_IN_LED_GPIO_Port, Built_IN_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -197,12 +334,44 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  /*Configure GPIO pin : Flashing_Pin */
+  GPIO_InitStruct.Pin = Flashing_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(Flashing_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LED2_2_Pin LED1_1_Pin LED2_1_Pin LED1_2_Pin */
+  GPIO_InitStruct.Pin = LED2_2_Pin|LED1_1_Pin|LED2_1_Pin|LED1_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Button2_1_Pin */
+  GPIO_InitStruct.Pin = Button2_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(Button2_1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Built_IN_LED_Pin */
+  GPIO_InitStruct.Pin = Built_IN_LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(Built_IN_LED_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : Button1_1_Pin Button1_2_Pin */
+  GPIO_InitStruct.Pin = Button1_1_Pin|Button1_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Button2_2_Pin */
+  GPIO_InitStruct.Pin = Button2_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(Button2_2_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
