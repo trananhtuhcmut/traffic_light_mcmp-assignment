@@ -16,12 +16,12 @@
  *      1         0        GREEN
  *      1         1        RED
  *
- * Traffic Light 1: LED1_1 (PC7) = Signal A, LED1_2 (PB6) = Signal B
+ * Traffic Light 1: LED1_1 (PB3) = Signal A, LED1_2 (PB6) = Signal B
  * Traffic Light 2: LED2_1 (PA8) = Signal A, LED2_2 (PA9) = Signal B
  */
 
 /* Luu trang thai hien tai cua tung duong */
-static TrafficLightState current_state[2] = {TL_OFF, TL_OFF};
+static Traffic_Light_State current_state[2] = {TL_OFF, TL_OFF};
 
 void traffic_light_init(void)
 {
@@ -29,7 +29,7 @@ void traffic_light_init(void)
     traffic_set(2, TL_OFF);
 }
 
-void traffic_set(uint8_t road, TrafficLightState state)
+void traffic_set(uint8_t road, Traffic_Light_State state)
 {
     GPIO_PinState sigA = (state >> 1) & 1 ? GPIO_PIN_SET : GPIO_PIN_RESET;
     GPIO_PinState sigB = (state) & 1 ? GPIO_PIN_SET : GPIO_PIN_RESET;
@@ -48,7 +48,7 @@ void traffic_set(uint8_t road, TrafficLightState state)
     }
 }
 
-TrafficLightState traffic_get(uint8_t road)
+Traffic_Light_State traffic_get(uint8_t road)
 {
     if (road == 1)
         return current_state[0];

@@ -22,7 +22,7 @@ typedef struct {
 #define NO_TASK_ID    0
 
 //Error definiton
-#define SCH_REPORT_ERRORS
+//#define SCH_REPORT_ERRORS
 
 #define RETURN_NORMAL                                   0
 #define RETURN_ERROR                                    1

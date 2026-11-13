@@ -14,7 +14,7 @@
 #define TICK_PER_SEC (1000U / SCHEDULER_TICK_MS) // 100 ticks = 1s
 
 #define NUM_ROADS 2U
-#define NUM_BUTTONS 4U
+#define NUM_BUTTONS 5U
 
 // In seconds, common to all 3 LEDs
 #define MIN_LIGHT_DUR 1U
@@ -24,6 +24,8 @@
 #define DEFAULT_RED 5U
 #define DEFAULT_AMBER 2U
 #define DEFAULT_GREEN 3U
+
+
 
 // System state/mode
 typedef enum
