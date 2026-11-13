@@ -4,8 +4,8 @@
 typedef struct
 {
     const State_t *curr_state;          // Read-only
-    Traffic_Light_Config_t *config;     // Read-Write
-    Traffic_Light_Config_t temp_config; // Working copy while editing
+    Traffic_Light_Config_t *config;     // Read-Write (committed on exit if synced)
+    Traffic_Light_Config_t temp_config; // Working copy confirmed per color
     Traffic_Light_State *road_1;
     Traffic_Light_State *road_2;
     Display_Data_t *disp_data;
@@ -13,20 +13,19 @@ typedef struct
 
 static fsm_setting_context_t setting_ctx = {0};
 
-static const State_t STATE_SETTING_EDIT_Y1;
-static const State_t STATE_SETTING_EDIT_G1;
-static const State_t STATE_SETTING_EDIT_Y2;
-static const State_t STATE_SETTING_EDIT_G2;
+static const State_t STATE_SETTING_EDIT_RED;
+static const State_t STATE_SETTING_EDIT_AMBER;
+static const State_t STATE_SETTING_EDIT_GREEN;
 
 static void setting_stateTrans(const State_t *next_state);
-static void setting_edit_Y1_entry(void);
-static void setting_edit_Y1_run(void);
-static void setting_edit_G1_entry(void);
-static void setting_edit_G1_run(void);
-static void setting_edit_Y2_entry(void);
-static void setting_edit_Y2_run(void);
-static void setting_edit_G2_entry(void);
-static void setting_edit_G2_run(void);
+static void setting_enter_field(Traffic_Light_State color, Setting_Field field, uint16_t init_dur);
+static void setting_run_common(Traffic_Light_State color, uint16_t *dur_r1, uint16_t *dur_r2);
+static void setting_edit_red_entry(void);
+static void setting_edit_red_run(void);
+static void setting_edit_amber_entry(void);
+static void setting_edit_amber_run(void);
+static void setting_edit_green_entry(void);
+static void setting_edit_green_run(void);
 
 void fsm_setting_init(Traffic_Light_Config_t *cfg,
                       Traffic_Light_State *r1,
@@ -52,8 +51,14 @@ void fsm_setting_enter(void)
         setting_ctx.disp_data->mode = MODE_SETTING;
     }
 
-    // Always start Setting mode by editing Road 1 Yellow (Y1)
-    setting_stateTrans(&STATE_SETTING_EDIT_Y1);
+    // Load a fresh working copy of the saved config when entering Setting mode
+    if (setting_ctx.config != NULL)
+    {
+        setting_ctx.temp_config = *setting_ctx.config;
+    }
+
+    // Start Setting mode by editing the Red pair
+    setting_stateTrans(&STATE_SETTING_EDIT_RED);
 }
 
 void fsm_setting_run(void)
@@ -72,6 +77,14 @@ void fsm_setting_exit(void)
     {
         setting_ctx.curr_state->on_exit();
     }
+
+    // Commit temp_config only if Red == Amber + Green; otherwise discard it
+    if (setting_ctx.config != NULL &&
+        setting_ctx.temp_config.R1_dur == (setting_ctx.temp_config.Y1_dur + setting_ctx.temp_config.G1_dur))
+    {
+        *setting_ctx.config = setting_ctx.temp_config;
+    }
+    setting_ctx.temp_config = (Traffic_Light_Config_t){0};
 
     // Clear active editing field and state pointer when leaving Setting mode
     if (setting_ctx.disp_data != NULL)
@@ -99,238 +112,110 @@ static void setting_stateTrans(const State_t *next_state)
     }
 }
 
-static void setting_edit_Y1_entry(void)
+static void setting_enter_field(Traffic_Light_State color, Setting_Field field, uint16_t init_dur)
 {
-    // Turn on Road 1 Yellow and turn off Road 2
-    *setting_ctx.road_1 = TL_AMBER;
-    *setting_ctx.road_2 = TL_OFF;
+    // Turn both roads to the active color being edited
+    *setting_ctx.road_1 = color;
+    *setting_ctx.road_2 = color;
 
-    // Reload temporary config from current saved config (discards unconfirmed edits)
-    setting_ctx.temp_config = *setting_ctx.config;
-
-    // Update display with the active field (Y1) and its starting draft duration
-    setting_ctx.disp_data->active_field = EDIT_Y1;
-    setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.Y1_dur;
+    // Load the active field and its confirmed-so-far duration (drops unconfirmed draft edits)
+    setting_ctx.disp_data->active_field = field;
+    setting_ctx.disp_data->draft_duration = init_dur;
 }
 
-static void setting_edit_Y1_run(void)
+static void setting_run_common(Traffic_Light_State color, uint16_t *dur_r1, uint16_t *dur_r2)
 {
-    // Move to Edit G1 when the switch-light button is pressed
+    // Blink both roads' active LEDs at 2 Hz (toggle every 250 ms)
+    if (event.TICK_250MS)
+    {
+        Traffic_Light_State next_led = (*setting_ctx.road_1 == color) ? TL_OFF : color;
+        *setting_ctx.road_1 = next_led;
+        *setting_ctx.road_2 = next_led;
+    }
+
+    // Increment draft duration with wrap-around (99 -> 1)
+    if (event.INCREASE)
+    {
+        setting_ctx.disp_data->draft_duration = (setting_ctx.disp_data->draft_duration >= MAX_LIGHT_DUR)
+                                                    ? MIN_LIGHT_DUR
+                                                    : (setting_ctx.disp_data->draft_duration + 1U);
+    }
+
+    // Decrement draft duration with wrap-around (1 -> 99)
+    if (event.DECREASE)
+    {
+        setting_ctx.disp_data->draft_duration = (setting_ctx.disp_data->draft_duration <= MIN_LIGHT_DUR)
+                                                    ? MAX_LIGHT_DUR
+                                                    : (setting_ctx.disp_data->draft_duration - 1U);
+    }
+
+    // Save the draft duration into temp_config for both roads (committed on mode exit if synced)
+    if (event.CONFIRM)
+    {
+        *dur_r1 = setting_ctx.disp_data->draft_duration;
+        *dur_r2 = setting_ctx.disp_data->draft_duration;
+    }
+}
+
+static void setting_edit_red_entry(void)
+{
+    setting_enter_field(TL_RED, EDIT_RED, setting_ctx.temp_config.R1_dur);
+}
+
+static void setting_edit_red_run(void)
+{
+    // Cycle to Edit Amber when the switch-light button is pressed
     if (event.SWITCH_LIGHT)
     {
-        setting_stateTrans(&STATE_SETTING_EDIT_G1);
+        setting_stateTrans(&STATE_SETTING_EDIT_AMBER);
         return;
     }
 
-    // Blink Road 1 Yellow LED at 2 Hz (toggle every 250 ms)
-    if (event.TICK_250MS)
-    {
-        *setting_ctx.road_1 = (*setting_ctx.road_1 == TL_AMBER) ? TL_OFF : TL_AMBER;
-    }
-
-    // Increment temporary Y1 duration with wrap-around (99 -> 1)
-    if (event.INCREASE)
-    {
-        setting_ctx.temp_config.Y1_dur = (setting_ctx.temp_config.Y1_dur >= MAX_LIGHT_DUR)
-                                             ? MIN_LIGHT_DUR
-                                             : (setting_ctx.temp_config.Y1_dur + 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.Y1_dur;
-    }
-
-    // Decrement temporary Y1 duration with wrap-around (1 -> 99)
-    if (event.DECREASE)
-    {
-        setting_ctx.temp_config.Y1_dur = (setting_ctx.temp_config.Y1_dur <= MIN_LIGHT_DUR)
-                                             ? MAX_LIGHT_DUR
-                                             : (setting_ctx.temp_config.Y1_dur - 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.Y1_dur;
-    }
-
-    // Recalculate R2 duration (Y1 + G1) and commit temporary config on confirm
-    if (event.CONFIRM)
-    {
-        setting_ctx.temp_config.R2_dur = setting_ctx.temp_config.Y1_dur + setting_ctx.temp_config.G1_dur;
-        *setting_ctx.config = setting_ctx.temp_config;
-    }
+    setting_run_common(TL_RED, &setting_ctx.temp_config.R1_dur, &setting_ctx.temp_config.R2_dur);
 }
 
-static const State_t STATE_SETTING_EDIT_Y1 = {.on_entry = setting_edit_Y1_entry,
-                                              .on_run = setting_edit_Y1_run,
-                                              .on_exit = NULL};
+static const State_t STATE_SETTING_EDIT_RED = {.on_entry = setting_edit_red_entry,
+                                               .on_run = setting_edit_red_run,
+                                               .on_exit = NULL};
 
-static void setting_edit_G1_entry(void)
+static void setting_edit_amber_entry(void)
 {
-    // Turn on Road 1 Green and turn off Road 2
-    *setting_ctx.road_1 = TL_GREEN;
-    *setting_ctx.road_2 = TL_OFF;
-
-    // Reload temporary config from current saved config (discards unconfirmed edits)
-    setting_ctx.temp_config = *setting_ctx.config;
-
-    // Update display with the active field (G1) and its starting draft duration
-    setting_ctx.disp_data->active_field = EDIT_G1;
-    setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.G1_dur;
+    setting_enter_field(TL_AMBER, EDIT_AMBER, setting_ctx.temp_config.Y1_dur);
 }
 
-static void setting_edit_G1_run(void)
+static void setting_edit_amber_run(void)
 {
-    // Move to Edit Y2 when the switch-light button is pressed
+    // Cycle to Edit Green when the switch-light button is pressed
     if (event.SWITCH_LIGHT)
     {
-        setting_stateTrans(&STATE_SETTING_EDIT_Y2);
+        setting_stateTrans(&STATE_SETTING_EDIT_GREEN);
         return;
     }
 
-    // Blink Road 1 Green LED at 2 Hz (toggle every 250 ms)
-    if (event.TICK_250MS)
-    {
-        *setting_ctx.road_1 = (*setting_ctx.road_1 == TL_GREEN) ? TL_OFF : TL_GREEN;
-    }
-
-    // Increment temporary G1 duration with wrap-around (99 -> 1)
-    if (event.INCREASE)
-    {
-        setting_ctx.temp_config.G1_dur = (setting_ctx.temp_config.G1_dur >= MAX_LIGHT_DUR)
-                                             ? MIN_LIGHT_DUR
-                                             : (setting_ctx.temp_config.G1_dur + 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.G1_dur;
-    }
-
-    // Decrement temporary G1 duration with wrap-around (1 -> 99)
-    if (event.DECREASE)
-    {
-        setting_ctx.temp_config.G1_dur = (setting_ctx.temp_config.G1_dur <= MIN_LIGHT_DUR)
-                                             ? MAX_LIGHT_DUR
-                                             : (setting_ctx.temp_config.G1_dur - 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.G1_dur;
-    }
-
-    // Recalculate R2 duration (Y1 + G1) and commit temporary config on confirm
-    if (event.CONFIRM)
-    {
-        setting_ctx.temp_config.R2_dur = setting_ctx.temp_config.Y1_dur + setting_ctx.temp_config.G1_dur;
-        *setting_ctx.config = setting_ctx.temp_config;
-    }
+    setting_run_common(TL_AMBER, &setting_ctx.temp_config.Y1_dur, &setting_ctx.temp_config.Y2_dur);
 }
 
-static const State_t STATE_SETTING_EDIT_G1 = {.on_entry = setting_edit_G1_entry,
-                                              .on_run = setting_edit_G1_run,
-                                              .on_exit = NULL};
+static const State_t STATE_SETTING_EDIT_AMBER = {.on_entry = setting_edit_amber_entry,
+                                                 .on_run = setting_edit_amber_run,
+                                                 .on_exit = NULL};
 
-static void setting_edit_Y2_entry(void)
+static void setting_edit_green_entry(void)
 {
-    // Turn off Road 1 and turn on Road 2 Yellow
-    *setting_ctx.road_1 = TL_OFF;
-    *setting_ctx.road_2 = TL_AMBER;
-
-    // Reload temporary config from current saved config (discards unconfirmed edits)
-    setting_ctx.temp_config = *setting_ctx.config;
-
-    // Update display with the active field (Y2) and its starting draft duration
-    setting_ctx.disp_data->active_field = EDIT_Y2;
-    setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.Y2_dur;
+    setting_enter_field(TL_GREEN, EDIT_GREEN, setting_ctx.temp_config.G1_dur);
 }
 
-static void setting_edit_Y2_run(void)
+static void setting_edit_green_run(void)
 {
-    // Move to Edit G2 when the switch-light button is pressed
+    // Wrap back to Edit Red when the switch-light button is pressed
     if (event.SWITCH_LIGHT)
     {
-        setting_stateTrans(&STATE_SETTING_EDIT_G2);
+        setting_stateTrans(&STATE_SETTING_EDIT_RED);
         return;
     }
 
-    // Blink Road 2 Yellow LED at 2 Hz (toggle every 250 ms)
-    if (event.TICK_250MS)
-    {
-        *setting_ctx.road_2 = (*setting_ctx.road_2 == TL_AMBER) ? TL_OFF : TL_AMBER;
-    }
-
-    // Increment temporary Y2 duration with wrap-around (99 -> 1)
-    if (event.INCREASE)
-    {
-        setting_ctx.temp_config.Y2_dur = (setting_ctx.temp_config.Y2_dur >= MAX_LIGHT_DUR)
-                                             ? MIN_LIGHT_DUR
-                                             : (setting_ctx.temp_config.Y2_dur + 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.Y2_dur;
-    }
-
-    // Decrement temporary Y2 duration with wrap-around (1 -> 99)
-    if (event.DECREASE)
-    {
-        setting_ctx.temp_config.Y2_dur = (setting_ctx.temp_config.Y2_dur <= MIN_LIGHT_DUR)
-                                             ? MAX_LIGHT_DUR
-                                             : (setting_ctx.temp_config.Y2_dur - 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.Y2_dur;
-    }
-
-    // Recalculate R1 duration (Y2 + G2) and commit temporary config on confirm
-    if (event.CONFIRM)
-    {
-        setting_ctx.temp_config.R1_dur = setting_ctx.temp_config.Y2_dur + setting_ctx.temp_config.G2_dur;
-        *setting_ctx.config = setting_ctx.temp_config;
-    }
+    setting_run_common(TL_GREEN, &setting_ctx.temp_config.G1_dur, &setting_ctx.temp_config.G2_dur);
 }
 
-static const State_t STATE_SETTING_EDIT_Y2 = {.on_entry = setting_edit_Y2_entry,
-                                              .on_run = setting_edit_Y2_run,
-                                              .on_exit = NULL};
-
-static void setting_edit_G2_entry(void)
-{
-    // Turn off Road 1 and turn on Road 2 Green
-    *setting_ctx.road_1 = TL_OFF;
-    *setting_ctx.road_2 = TL_GREEN;
-
-    // Reload temporary config from current saved config (discards unconfirmed edits)
-    setting_ctx.temp_config = *setting_ctx.config;
-
-    // Update display with the active field (G2) and its starting draft duration
-    setting_ctx.disp_data->active_field = EDIT_G2;
-    setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.G2_dur;
-}
-
-static void setting_edit_G2_run(void)
-{
-    // Wrap back to Edit Y1 when the switch-light button is pressed
-    if (event.SWITCH_LIGHT)
-    {
-        setting_stateTrans(&STATE_SETTING_EDIT_Y1);
-        return;
-    }
-
-    // Blink Road 2 Green LED at 2 Hz (toggle every 250 ms)
-    if (event.TICK_250MS)
-    {
-        *setting_ctx.road_2 = (*setting_ctx.road_2 == TL_GREEN) ? TL_OFF : TL_GREEN;
-    }
-
-    // Increment temporary G2 duration with wrap-around (99 -> 1)
-    if (event.INCREASE)
-    {
-        setting_ctx.temp_config.G2_dur = (setting_ctx.temp_config.G2_dur >= MAX_LIGHT_DUR)
-                                             ? MIN_LIGHT_DUR
-                                             : (setting_ctx.temp_config.G2_dur + 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.G2_dur;
-    }
-
-    // Decrement temporary G2 duration with wrap-around (1 -> 99)
-    if (event.DECREASE)
-    {
-        setting_ctx.temp_config.G2_dur = (setting_ctx.temp_config.G2_dur <= MIN_LIGHT_DUR)
-                                             ? MAX_LIGHT_DUR
-                                             : (setting_ctx.temp_config.G2_dur - 1U);
-        setting_ctx.disp_data->draft_duration = setting_ctx.temp_config.G2_dur;
-    }
-
-    // Recalculate R1 duration (Y2 + G2) and commit temporary config on confirm
-    if (event.CONFIRM)
-    {
-        setting_ctx.temp_config.R1_dur = setting_ctx.temp_config.Y2_dur + setting_ctx.temp_config.G2_dur;
-        *setting_ctx.config = setting_ctx.temp_config;
-    }
-}
-
-static const State_t STATE_SETTING_EDIT_G2 = {.on_entry = setting_edit_G2_entry,
-                                              .on_run = setting_edit_G2_run,
-                                              .on_exit = NULL};
+static const State_t STATE_SETTING_EDIT_GREEN = {.on_entry = setting_edit_green_entry,
+                                                 .on_run = setting_edit_green_run,
+                                                 .on_exit = NULL};
