@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2026 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2026 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -57,10 +57,7 @@ TIM_HandleTypeDef htim2;
 System_Mode curr_mode = MODE_AUTO;
 
 Traffic_Light_Config_t curr_light_config = {
-    .R1_dur = DEFAULT_RED,   .R2_dur = DEFAULT_RED,
-    .Y1_dur = DEFAULT_AMBER, .Y2_dur = DEFAULT_AMBER,
-    .G1_dur = DEFAULT_GREEN, .G2_dur = DEFAULT_GREEN
-};
+    .R1_dur = DEFAULT_RED, .R2_dur = DEFAULT_RED, .Y1_dur = DEFAULT_AMBER, .Y2_dur = DEFAULT_AMBER, .G1_dur = DEFAULT_GREEN, .G2_dur = DEFAULT_GREEN};
 
 System_Event_t event = {0};
 Display_Data_t curr_disp_data = {0};
@@ -85,88 +82,109 @@ void system_fsm_task(void);
 /* USER CODE BEGIN 0 */
 void system_fsm_task(void)
 {
-    /* 1. Tao co su kien thoi gian TICK_250MS (25 ticks) va TICK_1S (100 ticks) */
-    if (++tick_250ms_cnt >= (250U / SCHEDULER_TICK_MS))
-    {
-        tick_250ms_cnt = 0;
-        event.TICK_250MS = true;
-    }
+  /* 1. Tao co su kien thoi gian TICK_250MS (25 ticks) va TICK_1S (100 ticks) */
+  if (++tick_250ms_cnt >= (250U / SCHEDULER_TICK_MS))
+  {
+    tick_250ms_cnt = 0;
+    event.TICK_250MS = true;
+  }
 
-    if (++tick_1s_cnt >= TICK_PER_SEC)
-    {
-        tick_1s_cnt = 0;
-        event.TICK_1S = true;
-    }
+  if (++tick_1s_cnt >= TICK_PER_SEC)
+  {
+    tick_1s_cnt = 0;
+    event.TICK_1S = true;
+  }
 
-    /* 2. Doc su kien tu cac nut nhan */
-    if (is_button_pressed(0)) event.MODE_CHANGE  = true;
-    if (is_button_pressed(1)) event.SWITCH_LIGHT = true;
-    if (is_button_long_pressed(1)) event.CONFIRM = true;
-    if (is_button_pressed(2) || is_button_long_pressed(2)) event.INCREASE = true;
-    if (is_button_pressed(3) || is_button_long_pressed(3)) event.DECREASE = true;
+  /* 2. Doc su kien tu cac nut nhan */
+  if (is_button_pressed(0))
+    event.MODE_CHANGE = true;
+  if (is_button_pressed(1))
+    event.SWITCH_LIGHT = true;
+  if (is_button_long_pressed(1))
+    event.CONFIRM = true;
+  if (is_button_pressed(2) || is_button_long_pressed(2))
+    event.INCREASE = true;
+  if (is_button_pressed(3) || is_button_long_pressed(3))
+    event.DECREASE = true;
 #if (NUM_BUTTONS >= 5)
-    if (is_button_pressed(4)) event.CONFIRM      = true; /* Nut B1 (PC13) */
+  if (is_button_pressed(4))
+    event.CONFIRM = true; /* Nut B1 (PC13) */
 #endif
 
-    /* 3. Chuyen Mode khi co su kien MODE_CHANGE */
-    if (event.MODE_CHANGE)
-    {
-        switch (curr_mode)
-        {
-            case MODE_AUTO:
-                fsm_auto_exit();
-                curr_mode = MODE_MANUAL;
-                fsm_manual_enter();
-                break;
-
-            case MODE_MANUAL:
-                fsm_manual_exit();
-                curr_mode = MODE_SETTING;
-                fsm_setting_enter();
-                break;
-
-            case MODE_SETTING:
-                fsm_setting_exit();
-                curr_mode = MODE_AUTO;
-                fsm_auto_enter();
-                break;
-
-            default:
-                curr_mode = MODE_AUTO;
-                fsm_auto_enter();
-                break;
-        }
-    }
-
-    /* 4. Chay FSM cua Mode hien tai */
+  /* 3. Chuyen Mode khi co su kien MODE_CHANGE */
+  if (event.MODE_CHANGE)
+  {
     switch (curr_mode)
     {
-        case MODE_AUTO:
-            fsm_auto_run();
-            break;
-        case MODE_MANUAL:
-            fsm_manual_run();
-            break;
-        case MODE_SETTING:
-            fsm_setting_run();
-            break;
-        default:
-            break;
+    case MODE_AUTO:
+      fsm_auto_exit();
+      curr_mode = MODE_MANUAL;
+      fsm_manual_enter();
+      break;
+
+    case MODE_MANUAL:
+      fsm_manual_exit();
+      curr_mode = MODE_SETTING;
+      fsm_setting_enter();
+      break;
+
+    case MODE_SETTING:
+      fsm_setting_exit();
+      curr_mode = MODE_AUTO;
+      fsm_auto_enter();
+      break;
+
+    default:
+      curr_mode = MODE_AUTO;
+      fsm_auto_enter();
+      break;
     }
+    // Give the newly entered mode a full 1s / 250ms period
+    tick_1s_cnt = 0;
+    tick_250ms_cnt = 0;
+  }
 
-    /* 5. Xuat trang thai den ra GPIO qua traffic_light.c */
+  /* 4. Chay FSM cua Mode hien tai */
+  switch (curr_mode)
+  {
+  case MODE_AUTO:
+    fsm_auto_run();
+    break;
+  case MODE_MANUAL:
+    fsm_manual_run();
+    break;
+  case MODE_SETTING:
+    fsm_setting_run();
+    break;
+  default:
+    break;
+  }
+
+  /* 5. Kiem tra an toan & xuat trang thai den ra GPIO qua traffic_light.c */
+  if (road_1_state == TL_GREEN && road_2_state == TL_GREEN)
+  {
+    road_1_state = TL_RED;
+    road_2_state = TL_RED;
+  }
+
+  if (road_1_state != traffic_get(1))
+  {
     traffic_set(1, road_1_state);
+  }
+  if (road_2_state != traffic_get(2))
+  {
     traffic_set(2, road_2_state);
+  }
 
-    /* 6. Xoa toan bo co su kien one-shot sau moi chu ky */
-    event = (System_Event_t){0};
+  /* 6. Xoa toan bo co su kien one-shot sau moi chu ky */
+  event = (System_Event_t){0};
 }
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -207,10 +225,10 @@ int main(void)
   curr_mode = MODE_AUTO;
   fsm_auto_enter();
 
-  SCH_Add_Task(button_reading,  0, 1);
+  SCH_Add_Task(button_reading, 0, 1);
   SCH_Add_Task(system_fsm_task, 0, 1);
-  SCH_Add_Task(display_task,    5, 10);
-  SCH_Add_Task(lcd_flush_task,  6, 5);
+  SCH_Add_Task(display_task, 5, 10);
+  SCH_Add_Task(lcd_flush_task, 6, 5);
   SCH_Add_Task(env_sample_task, 10, 200);
 
   HAL_TIM_Base_Start_IT(&htim2);
@@ -229,17 +247,17 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -251,9 +269,8 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -266,10 +283,10 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief I2C1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief I2C1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C1_Init(void)
 {
   /* USER CODE BEGIN I2C1_Init 0 */
@@ -298,10 +315,10 @@ static void MX_I2C1_Init(void)
 }
 
 /**
-  * @brief TIM2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM2_Init(void)
 {
   /* USER CODE BEGIN TIM2_Init 0 */
@@ -341,10 +358,10 @@ static void MX_TIM2_Init(void)
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -359,7 +376,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED1_1_GPIO_Port, LED1_1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED2_1_Pin|LED2_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED2_1_Pin | LED2_2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED1_2_GPIO_Port, LED1_2_Pin, GPIO_PIN_RESET);
@@ -371,7 +388,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : Button1_2_Pin Button2_1_Pin Button1_1_Pin Button2_2_Pin */
-  GPIO_InitStruct.Pin = Button1_2_Pin|Button2_1_Pin|Button1_1_Pin|Button2_2_Pin;
+  GPIO_InitStruct.Pin = Button1_2_Pin | Button2_1_Pin | Button1_1_Pin | Button2_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -384,7 +401,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(LED1_1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LED2_1_Pin LED2_2_Pin */
-  GPIO_InitStruct.Pin = LED2_1_Pin|LED2_2_Pin;
+  GPIO_InitStruct.Pin = LED2_1_Pin | LED2_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -406,9 +423,9 @@ static void MX_GPIO_Init(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -420,14 +437,14 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
