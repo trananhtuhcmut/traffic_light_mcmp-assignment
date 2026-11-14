@@ -5,13 +5,12 @@
 #include "lcd.h"
 #include <stdio.h>
 
-#define ENV_READ_DELAY_TICKS 10 /* 10 tick x 10 ms = 100 ms >= 80 ms DHT20 can de do xong */
+#define ENV_READ_DELAY_TICKS 10
 
 int16_t env_get_temp_x10(void) { return curr_disp_data.temp_x10; }
 uint16_t env_get_hum_x10(void) { return curr_disp_data.hum_x10; }
 uint8_t env_is_valid(void)     { return curr_disp_data.env_valid ? 1U : 0U; }
 
-/* One-shot task: Period = 0 -> scheduler tu xoa sau khi chay */
 static void env_read_task(void)
 {
     int16_t t;
@@ -24,7 +23,7 @@ static void env_read_task(void)
     }
     else
     {
-        curr_disp_data.env_valid = false; /* LCD hien "--" thay vi so cu */
+        curr_disp_data.env_valid = false;
     }
 }
 
@@ -38,37 +37,52 @@ void env_sample_task(void)
 
 void display_task(void)
 {
-    char l0[32], l1[32]; /* lcd_put_line() tu cat con 16 ky tu */
+    char l0[32], l1[32];
 
-    /* Dong 0: Hien thi theo Mode tu curr_disp_data */
-    switch (curr_disp_data.mode)
+    /* Uu tien hien thong bao INVALID neu nguoi dung nhap R != G + Y */
+    if (curr_disp_data.invalid_ticks > 0)
     {
-        case MODE_AUTO:
-            snprintf(l0, sizeof l0, "AUTO R1:%02u R2:%02u",
-                     (unsigned)curr_disp_data.countdown_road1,
-                     (unsigned)curr_disp_data.countdown_road2);
-            break;
-
-        case MODE_MANUAL:
-            snprintf(l0, sizeof l0, "MANUAL MODE");
-            break;
-
-        case MODE_SETTING:
+        curr_disp_data.invalid_ticks--;
+        snprintf(l0, sizeof l0, "INVALID! R!=G+Y");
+    }
+    else
+    {
+        switch (curr_disp_data.mode)
         {
-            const char *field_name = "--";
-            if (curr_disp_data.active_field == EDIT_Y1)      field_name = "Y1";
-            else if (curr_disp_data.active_field == EDIT_G1) field_name = "G1";
-            else if (curr_disp_data.active_field == EDIT_Y2) field_name = "Y2";
-            else if (curr_disp_data.active_field == EDIT_G2) field_name = "G2";
+            case MODE_AUTO:
+                snprintf(l0, sizeof l0, "AUTO R1:%02u R2:%02u",
+                         (unsigned)curr_disp_data.countdown_road1,
+                         (unsigned)curr_disp_data.countdown_road2);
+                break;
 
-            snprintf(l0, sizeof l0, "SET %s: %02us",
-                     field_name, (unsigned)curr_disp_data.draft_duration);
-            break;
+            case MODE_MANUAL:
+                if (curr_disp_data.countdown_road1 > 0)
+                {
+                    snprintf(l0, sizeof l0, "MANUAL YEL: %02us",
+                             (unsigned)curr_disp_data.countdown_road1);
+                }
+                else
+                {
+                    snprintf(l0, sizeof l0, "MANUAL MODE");
+                }
+                break;
+
+            case MODE_SETTING:
+            {
+                const char *field_name = "---";
+                if (curr_disp_data.active_field == EDIT_RED)        field_name = "RED";
+                else if (curr_disp_data.active_field == EDIT_AMBER) field_name = "AMB";
+                else if (curr_disp_data.active_field == EDIT_GREEN) field_name = "GRN";
+
+                snprintf(l0, sizeof l0, "SET %s: %02us",
+                         field_name, (unsigned)curr_disp_data.draft_duration);
+                break;
+            }
+
+            default:
+                snprintf(l0, sizeof l0, "TRAFFIC SYSTEM");
+                break;
         }
-
-        default:
-            snprintf(l0, sizeof l0, "TRAFFIC SYSTEM");
-            break;
     }
 
     /* Dong 1: Hien thi nhiet do & do am tu DHT20 */

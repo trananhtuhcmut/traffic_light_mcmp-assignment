@@ -1,5 +1,3 @@
-/**
- */
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
 
@@ -25,7 +23,8 @@
 #define DEFAULT_AMBER 2U
 #define DEFAULT_GREEN 3U
 
-
+// Manual mode fixed Amber buffer duration (3 seconds)
+#define MANUAL_AMBER_DUR 3U
 
 // System state/mode
 typedef enum
@@ -36,7 +35,6 @@ typedef enum
 } System_Mode;
 
 // Abstract light state encoding
-/* Trang thai den giao thong */
 typedef enum
 {
     TL_OFF = 0,   // 00
@@ -60,10 +58,9 @@ typedef struct
 typedef enum
 {
     EDIT_NONE = 0,
-    EDIT_Y1,
-    EDIT_G1,
-    EDIT_Y2,
-    EDIT_G2
+    EDIT_RED,
+    EDIT_AMBER,
+    EDIT_GREEN
 } Setting_Field;
 
 typedef struct
@@ -81,7 +78,6 @@ typedef struct
 typedef enum
 {
     NO_ERROR = 0
-    // to be decided
 } System_Error;
 
 // Struct to store LCD display data
@@ -93,10 +89,11 @@ typedef struct
     uint16_t countdown_road2;
     Setting_Field active_field; // Which light is being edited
     uint16_t draft_duration;    // Current number being entered
+    uint8_t invalid_ticks;      // Countdown ticks (x100ms) to show "INVALID" on LCD
     /* --- 2. Environment (DHT20) Data --- */
-    int16_t temp_x10; // Temperature in 0.1 deg C (e.g., 285 = 28.5 C, can be negative)
-    uint16_t hum_x10; // Relative humidity in 0.1 %RH (e.g., 652 = 65.2%)
-    bool env_valid;   // True if reading is good, false if sensor disconnected/reading
+    int16_t temp_x10;
+    uint16_t hum_x10;
+    bool env_valid;
 } Display_Data_t;
 
 // Common state struct (containing state logics)
