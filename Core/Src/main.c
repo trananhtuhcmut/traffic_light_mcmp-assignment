@@ -150,6 +150,8 @@ void system_fsm_task(void)
     // Give the newly entered mode a full 1s / 250ms period
     tick_1s_cnt = 0;
     tick_250ms_cnt = 0;
+    event.TICK_1S = false;
+    event.TICK_250MS = false;
   }
 
   /* 4. Chay FSM cua Mode hien tai */

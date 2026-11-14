@@ -51,7 +51,22 @@ void fsm_manual_enter(void)
         manu_ctx.disp_data->countdown_road2 = 0;
     }
 
-    manu_stateTrans(&STATE_MAN_R1_G2);
+    if (*manu_ctx.road_1 == TL_GREEN)
+    {
+        manu_stateTrans(&STATE_MAN_G1_R2);
+    }
+    else if (*manu_ctx.road_1 == TL_AMBER)
+    {
+        manu_stateTrans(&STATE_MAN_Y1_R2_BUF);
+    }
+    else if (*manu_ctx.road_2 == TL_AMBER)
+    {
+        manu_stateTrans(&STATE_MAN_R1_Y2_BUF);
+    }
+    else
+    {
+        manu_stateTrans(&STATE_MAN_R1_G2);
+    }
 }
 
 void fsm_manual_run(void)
