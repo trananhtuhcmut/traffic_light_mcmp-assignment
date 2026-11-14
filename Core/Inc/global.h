@@ -90,6 +90,7 @@ typedef struct
     Setting_Field active_field; // Which light is being edited
     uint16_t draft_duration;    // Current number being entered
     uint8_t invalid_ticks;      // Countdown ticks (x100ms) to show "INVALID" on LCD
+    uint8_t set_ticks;  		//For set button
     /* --- 2. Environment (DHT20) Data --- */
     int16_t temp_x10;
     uint16_t hum_x10;

@@ -186,7 +186,11 @@ void system_fsm_task(void)
 
   /* 6. Xoa toan bo co su kien one-shot sau moi chu ky */
   event = (System_Event_t){0};
+
+	__WFI();
 }
+
+
 /* USER CODE END 0 */
 
 /**

@@ -45,6 +45,13 @@ void display_task(void)
         curr_disp_data.invalid_ticks--;
         snprintf(l0, sizeof l0, "INVALID! R!=G+Y");
     }
+
+    else if (curr_disp_data.set_ticks > 0)
+        {
+            curr_disp_data.set_ticks--;
+            snprintf(l0, sizeof l0, "      SET!      ");
+        }
+
     else
     {
         switch (curr_disp_data.mode)
