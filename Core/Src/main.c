@@ -189,7 +189,6 @@ void system_fsm_task(void)
   /* 6. Xoa toan bo co su kien one-shot sau moi chu ky */
   event = (System_Event_t){0};
 
-	__WFI();
 }
 
 
@@ -252,6 +251,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  __WFI();
     SCH_Dispatch_Tasks();
     /* USER CODE END WHILE */
 
