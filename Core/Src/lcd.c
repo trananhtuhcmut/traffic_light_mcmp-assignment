@@ -7,18 +7,17 @@
 #define LCD_BL   0x08   /* P3 = den nen */
 
 #define LCD_I2C_TIMEOUT_MS  20
-#define DHT20_PROBE_ADDR8   (0x38U << 1) /* Dia chi 8-bit cua DHT20 tren mach that */
 
 static I2C_HandleTypeDef *lcd_i2c;
 static uint8_t lcd_addr8;
 static uint8_t lcd_bl = LCD_BL;
 static uint8_t lcd_ok = 0;
-static uint8_t lcd_use_soft_i2c = 0; /* 0: Mach that (Hardware I2C), 1: Proteus (Soft I2C) */
+static uint8_t lcd_use_soft_i2c = 0; /* 0: Hardware I2C, 1: Soft I2C */
 
 static char    lcd_want [LCD_ROWS][LCD_COLS];
 static char    lcd_shown[LCD_ROWS][LCD_COLS];
 
-/* --- Khoi ham Software I2C du phong tu dong cho Proteus (PB8=SCL, PB9=SDA) --- */
+/* --- Khoi ham Software I2C tren PB8=SCL, PB9=SDA --- */
 #define SCL_H()  (GPIOB->BSRR = GPIO_PIN_8)
 #define SCL_L()  (GPIOB->BSRR = ((uint32_t)GPIO_PIN_8 << 16U))
 #define SDA_H()  (GPIOB->BSRR = GPIO_PIN_9)
@@ -30,9 +29,9 @@ static inline void soft_i2c_delay(void)
     for (volatile uint32_t i = 0; i < 10; i++) { __NOP(); }
 }
 
-static void soft_i2c_init_pins(void)
+/* Chuyen tam thoi PB8/PB9 sang GPIO Open-Drain de phat xung Soft-I2C */
+static void soft_i2c_acquire_bus(void)
 {
-    __HAL_RCC_I2C1_CLK_DISABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
     SCL_H();
     SDA_H();
@@ -46,10 +45,23 @@ static void soft_i2c_init_pins(void)
     soft_i2c_delay();
 }
 
-static void soft_i2c_restore_hw(void)
+/* Tra PB8/PB9 ve che do Hardware I2C1 (AF_OD) ngay sau khi truyen xong de DHT20 su dung */
+static void soft_i2c_release_bus(void)
 {
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8 | GPIO_PIN_9);
-    MX_I2C1_Init();
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin   = GPIO_PIN_8 | GPIO_PIN_9;
+    GPIO_InitStruct.Mode  = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull  = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    __HAL_RCC_I2C1_CLK_ENABLE();
+}
+
+static void soft_i2c_stop(void)
+{
+    SDA_L(); soft_i2c_delay();
+    SCL_H(); soft_i2c_delay();
+    SDA_H(); soft_i2c_delay();
 }
 
 static uint8_t soft_i2c_write_byte(uint8_t data)
@@ -75,20 +87,33 @@ static HAL_StatusTypeDef lcd_tx(uint8_t *buf, uint16_t len)
         return HAL_I2C_Master_Transmit(lcd_i2c, lcd_addr8, buf, len, LCD_I2C_TIMEOUT_MS);
     }
 
+    /* Muon bus PB8/PB9 sang Soft-I2C trong giao dich nay */
+    soft_i2c_acquire_bus();
+
+    /* START condition */
     SDA_H(); SCL_H(); soft_i2c_delay();
     SDA_L(); soft_i2c_delay();
     SCL_L(); soft_i2c_delay();
 
+    /* Gui byte dia chi va kiem tra ACK */
     if (!soft_i2c_write_byte(lcd_addr8)) {
-        SDA_L(); soft_i2c_delay(); SCL_H(); soft_i2c_delay(); SDA_H();
+        soft_i2c_stop();
+        soft_i2c_release_bus();
         return HAL_ERROR;
     }
+
+    /* Gui tung byte du lieu va kiem tra ACK cua MOI byte (Sua Loi 1) */
     for (uint16_t i = 0; i < len; i++) {
-        soft_i2c_write_byte(buf[i]);
+        if (!soft_i2c_write_byte(buf[i])) {
+            soft_i2c_stop();
+            soft_i2c_release_bus();
+            return HAL_ERROR;
+        }
     }
-    SDA_L(); soft_i2c_delay();
-    SCL_H(); soft_i2c_delay();
-    SDA_H(); soft_i2c_delay();
+
+    /* STOP condition & tra lai bus cho Hardware I2C1 (Sua Loi 3) */
+    soft_i2c_stop();
+    soft_i2c_release_bus();
     return HAL_OK;
 }
 
@@ -130,25 +155,13 @@ void lcd_init(I2C_HandleTypeDef *hi2c, uint8_t addr7)
     lcd_i2c   = hi2c;
     lcd_addr8 = (uint8_t)(addr7 << 1);
 
-    /* 1. Kiem tra I2C1 phan cung: Neu LCD (0x21) HOAC DHT20 (0x38) phan hoi -> Mach that */
-    uint8_t hw_lcd_ok   = (HAL_I2C_IsDeviceReady(hi2c, lcd_addr8, 2, 10) == HAL_OK);
-    uint8_t hw_dht20_ok = (HAL_I2C_IsDeviceReady(hi2c, DHT20_PROBE_ADDR8, 2, 10) == HAL_OK);
-
-    if (hw_lcd_ok || hw_dht20_ok) {
+    /* Thu Hardware I2C1 truoc; neu khong phan hoi (Proteus) thi dung Soft-I2C theo tung goi */
+    if (hi2c != NULL && HAL_I2C_IsDeviceReady(hi2c, lcd_addr8, 2, 10) == HAL_OK) {
         lcd_use_soft_i2c = 0;
-        lcd_ok = hw_lcd_ok;
+        lcd_ok = 1;
     } else {
-        /* 2. Ca 2 deu khong phan hoi tren I2C1 -> Thu Soft-I2C cho Proteus */
         lcd_use_soft_i2c = 1;
-        soft_i2c_init_pins();
-        if (lcd_tx(NULL, 0) == HAL_OK) {
-            lcd_ok = 1; /* Proteus ACK thanh cong */
-        } else {
-            /* Khong phai Proteus (hoac LCD mat ket noi) -> Khoi phuc lai I2C1 phan cung cho DHT20 */
-            soft_i2c_restore_hw();
-            lcd_use_soft_i2c = 0;
-            lcd_ok = 0;
-        }
+        lcd_ok = (lcd_tx(NULL, 0) == HAL_OK) ? 1U : 0U;
     }
 
     HAL_Delay(50);
