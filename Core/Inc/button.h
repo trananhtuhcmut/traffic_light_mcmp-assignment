@@ -17,7 +17,9 @@
  *   3 = Button2_2 (PB6, D10)
  *   4 = B1 on-board (PC13)
  */
-#define NUM_BUTTONS 5
+#ifndef NUM_BUTTONS
+#define NUM_BUTTONS 5U
+#endif
 
 /* Call every 10ms as a scheduler task */
 void button_init(void);

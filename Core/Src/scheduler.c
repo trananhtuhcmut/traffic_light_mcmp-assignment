@@ -11,8 +11,8 @@
 
 //Error
 uint8_t Error_code_G = 0;
-static uint8_t Last_error_code_G = 0;
-static uint32_t Error_tick_count_G = 0;
+//static uint8_t Last_error_code_G = 0;
+//static uint32_t Error_tick_count_G = 0;
 
 
 static sTask SCH_tasks_G[SCH_MAX_TASKS];
@@ -38,7 +38,7 @@ void SCH_Init(void) {
 
 
 // Add Task (PRIMASK guard: safe to call from task body, ISR, or nested)
-uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
+uint32_t SCH_Add_Task(void (*pFunction)(void), uint32_t DELAY, uint32_t PERIOD) {
     uint32_t primask = __get_PRIMASK();
     __disable_irq();
 
