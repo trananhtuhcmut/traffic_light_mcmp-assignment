@@ -38,7 +38,7 @@ void SCH_Init(void) {
 
 
 // Add Task (PRIMASK guard: safe to call from task body, ISR, or nested)
-uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
+uint32_t SCH_Add_Task(void (*pFunction)(void), uint32_t DELAY, uint32_t PERIOD) {
     uint32_t primask = __get_PRIMASK();
     __disable_irq();
 

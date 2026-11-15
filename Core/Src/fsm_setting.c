@@ -81,7 +81,7 @@ void fsm_setting_exit(void)
         }
         else if (setting_ctx.disp_data != NULL)
         {
-            setting_ctx.disp_data->invalid_ticks = 10U; // Hien "INVALID" trong 20 x 100ms = 2 giay
+            setting_ctx.disp_data->invalid_ticks = 10U; // Hien "INVALID" trong 10 x 100ms = 1 giay
         }
     }
     setting_ctx.temp_config = (Traffic_Light_Config_t){0};

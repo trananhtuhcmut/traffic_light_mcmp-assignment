@@ -4,17 +4,6 @@
  * @file           : main.c
  * @brief          : Main program body
  ******************************************************************************
- * @attention
- *
- * <h2><center>&copy; Copyright (c) 2026 STMicroelectronics.
- * All rights reserved.</center></h2>
- *
- * This software component is licensed by ST under BSD 3-Clause license,
- * the "License"; You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at:
- *                        opensource.org/licenses/BSD-3-Clause
- *
- ******************************************************************************
  */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
@@ -52,19 +41,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-I2C_HandleTypeDef hi2c1;
-
-TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-System_Mode curr_mode = MODE_AUTO;
-
-Traffic_Light_Config_t curr_light_config = {
-    .R1_dur = DEFAULT_RED, .R2_dur = DEFAULT_RED, .Y1_dur = DEFAULT_AMBER, .Y2_dur = DEFAULT_AMBER, .G1_dur = DEFAULT_GREEN, .G2_dur = DEFAULT_GREEN};
-
-System_Event_t event = {0};
-Display_Data_t curr_disp_data = {0};
-
 static Traffic_Light_State road_1_state = TL_OFF;
 static Traffic_Light_State road_2_state = TL_OFF;
 
@@ -113,11 +91,9 @@ void system_fsm_task(void)
 #endif
 
   if (curr_mode == MODE_MANUAL && event.SWITCH_LIGHT)
-    {
-      tick_1s_cnt = 0;
-    }
-
-
+  {
+    tick_1s_cnt = 0;
+  }
 
   /* 3. Chuyen Mode khi co su kien MODE_CHANGE */
   if (event.MODE_CHANGE)
@@ -172,10 +148,10 @@ void system_fsm_task(void)
 
   /* 5. Kiem tra an toan & xuat trang thai den ra GPIO qua traffic_light.c */
   if (curr_mode != MODE_SETTING && road_1_state == TL_GREEN && road_2_state == TL_GREEN)
-    {
-      road_1_state = TL_RED;
-      road_2_state = TL_RED;
-    }
+  {
+    road_1_state = TL_RED;
+    road_2_state = TL_RED;
+  }
 
   if (road_1_state != traffic_get(1))
   {
@@ -188,10 +164,7 @@ void system_fsm_task(void)
 
   /* 6. Xoa toan bo co su kien one-shot sau moi chu ky */
   event = (System_Event_t){0};
-
 }
-
-
 /* USER CODE END 0 */
 
 /**
@@ -228,7 +201,7 @@ int main(void)
   SCH_Init();
   button_init();
   traffic_light_init();
-  lcd_init(&hi2c1, 0x21);
+  lcd_init(&hi2c1, LCD_DEFAULT_ADDR);
   dht20_init(&hi2c1);
 
   fsm_auto_init(&curr_light_config, &road_1_state, &road_2_state, &curr_disp_data);
@@ -250,9 +223,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-	  {
+  {
     SCH_Dispatch_Tasks();
-	  __WFI();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -269,9 +241,6 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Initializes the RCC Oscillators according to the specified parameters
-   * in the RCC_OscInitTypeDef structure.
-   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -282,8 +251,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB buses clocks
-   */
+
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
@@ -296,23 +264,12 @@ void SystemClock_Config(void)
   }
 }
 
-/**
- * @brief I2C1 Initialization Function
- * @param None
- * @retval None
- */
-
 /* USER CODE BEGIN 4 */
 /* USER CODE END 4 */
 
-/**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
   {
@@ -321,20 +278,9 @@ void Error_Handler(void)
 }
 
 #ifdef USE_FULL_ASSERT
-/**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

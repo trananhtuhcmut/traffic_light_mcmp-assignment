@@ -1,4 +1,5 @@
 #include "lcd.h"
+#include "i2c.h"
 #include <string.h>
 
 #define LCD_RS   0x01   /* P0 */
@@ -6,17 +7,18 @@
 #define LCD_BL   0x08   /* P3 = den nen */
 
 #define LCD_I2C_TIMEOUT_MS  20
+#define DHT20_PROBE_ADDR8   (0x38U << 1) /* Dia chi 8-bit cua DHT20 tren mach that */
 
 static I2C_HandleTypeDef *lcd_i2c;
 static uint8_t lcd_addr8;
 static uint8_t lcd_bl = LCD_BL;
 static uint8_t lcd_ok = 0;
-static uint8_t lcd_use_soft_i2c = 0; /* 0: Mạch thật (Hardware I2C), 1: Proteus (Soft I2C) */
+static uint8_t lcd_use_soft_i2c = 0; /* 0: Mach that (Hardware I2C), 1: Proteus (Soft I2C) */
 
 static char    lcd_want [LCD_ROWS][LCD_COLS];
 static char    lcd_shown[LCD_ROWS][LCD_COLS];
 
-/* --- Khối hàm Software I2C dự phòng tự động cho Proteus (PB8=SCL, PB9=SDA) --- */
+/* --- Khoi ham Software I2C du phong tu dong cho Proteus (PB8=SCL, PB9=SDA) --- */
 #define SCL_H()  (GPIOB->BSRR = GPIO_PIN_8)
 #define SCL_L()  (GPIOB->BSRR = ((uint32_t)GPIO_PIN_8 << 16U))
 #define SDA_H()  (GPIOB->BSRR = GPIO_PIN_9)
@@ -44,6 +46,12 @@ static void soft_i2c_init_pins(void)
     soft_i2c_delay();
 }
 
+static void soft_i2c_restore_hw(void)
+{
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8 | GPIO_PIN_9);
+    MX_I2C1_Init();
+}
+
 static uint8_t soft_i2c_write_byte(uint8_t data)
 {
     for (uint8_t i = 0; i < 8; i++) {
@@ -63,11 +71,10 @@ static uint8_t soft_i2c_write_byte(uint8_t data)
 static HAL_StatusTypeDef lcd_tx(uint8_t *buf, uint16_t len)
 {
     if (!lcd_use_soft_i2c) {
-        /* Chạy trên mạch thật: dùng I2C1 phần cứng bình thường */
+        if (lcd_i2c == NULL) return HAL_ERROR;
         return HAL_I2C_Master_Transmit(lcd_i2c, lcd_addr8, buf, len, LCD_I2C_TIMEOUT_MS);
     }
 
-    /* Chạy trên Proteus: phát xung I2C trực tiếp trên PB8/PB9 */
     SDA_H(); SCL_H(); soft_i2c_delay();
     SDA_L(); soft_i2c_delay();
     SCL_L(); soft_i2c_delay();
@@ -123,15 +130,25 @@ void lcd_init(I2C_HandleTypeDef *hi2c, uint8_t addr7)
     lcd_i2c   = hi2c;
     lcd_addr8 = (uint8_t)(addr7 << 1);
 
-    /* Thử kiểm tra bằng I2C1 phần cứng trước (mạch thật sẽ trả về HAL_OK) */
-    if (HAL_I2C_IsDeviceReady(hi2c, lcd_addr8, 2, 10) == HAL_OK) {
+    /* 1. Kiem tra I2C1 phan cung: Neu LCD (0x21) HOAC DHT20 (0x38) phan hoi -> Mach that */
+    uint8_t hw_lcd_ok   = (HAL_I2C_IsDeviceReady(hi2c, lcd_addr8, 2, 10) == HAL_OK);
+    uint8_t hw_dht20_ok = (HAL_I2C_IsDeviceReady(hi2c, DHT20_PROBE_ADDR8, 2, 10) == HAL_OK);
+
+    if (hw_lcd_ok || hw_dht20_ok) {
         lcd_use_soft_i2c = 0;
-        lcd_ok = 1;
+        lcd_ok = hw_lcd_ok;
     } else {
-        /* Nếu I2C1 phần cứng không phản hồi (trên Proteus), tự động chuyển sang Soft I2C */
+        /* 2. Ca 2 deu khong phan hoi tren I2C1 -> Thu Soft-I2C cho Proteus */
         lcd_use_soft_i2c = 1;
         soft_i2c_init_pins();
-        lcd_ok = (lcd_tx(NULL, 0) == HAL_OK);
+        if (lcd_tx(NULL, 0) == HAL_OK) {
+            lcd_ok = 1; /* Proteus ACK thanh cong */
+        } else {
+            /* Khong phai Proteus (hoac LCD mat ket noi) -> Khoi phuc lai I2C1 phan cung cho DHT20 */
+            soft_i2c_restore_hw();
+            lcd_use_soft_i2c = 0;
+            lcd_ok = 0;
+        }
     }
 
     HAL_Delay(50);
