@@ -81,7 +81,7 @@ void fsm_setting_exit(void)
         }
         else if (setting_ctx.disp_data != NULL)
         {
-            setting_ctx.disp_data->invalid_ticks = 10U; // Hien "INVALID" trong 10 x 100ms = 1 giay
+            setting_ctx.disp_data->invalid_ticks = 30U; // Hien "INVALID" trong 10 x 100ms = 1 giay
         }
     }
     setting_ctx.temp_config = (Traffic_Light_Config_t){0};
@@ -117,7 +117,7 @@ static void setting_enter_field(Traffic_Light_State color, Setting_Field field, 
     {
         setting_ctx.disp_data->active_field = field;
         setting_ctx.disp_data->draft_duration = init_dur;
-        setting_ctx.disp_data->set_ticks = 0;	//For set button
+        setting_ctx.disp_data->set_ticks = 0; // For set button
     }
 }
 
@@ -150,9 +150,9 @@ static void setting_run_common(Traffic_Light_State color, uint16_t *dur_r1, uint
         *dur_r2 = setting_ctx.disp_data->draft_duration;
 
         if (setting_ctx.disp_data != NULL)
-                {
-                    setting_ctx.disp_data->set_ticks = 10U;
-                }
+        {
+            setting_ctx.disp_data->set_ticks = 20U;
+        }
     }
 }
 
