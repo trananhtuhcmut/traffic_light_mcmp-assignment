@@ -131,8 +131,8 @@ static void manu_R1_Y2_entry(void)
     *manu_ctx.road_1 = TL_RED;
     *manu_ctx.road_2 = TL_AMBER;
 
-    // Co dinh den vang sang 3 giay truoc khi tu dong chuyen sang G1_R2
-    manu_ctx.loc_tim = MANUAL_AMBER_DUR;
+    // den vang sang truoc khi tu dong chuyen sang G1_R2
+    manu_ctx.loc_tim = manu_ctx.config->Y2_dur;
     if (manu_ctx.disp_data != NULL)
     {
         manu_ctx.disp_data->countdown_road1 = manu_ctx.loc_tim;
@@ -187,8 +187,8 @@ static void manu_Y1_R2_entry(void)
     *manu_ctx.road_1 = TL_AMBER;
     *manu_ctx.road_2 = TL_RED;
 
-    // Co dinh den vang sang 3 giay truoc khi tu dong chuyen sang R1_G2
-    manu_ctx.loc_tim = MANUAL_AMBER_DUR;
+    // den vang sang truoc khi tu dong chuyen sang R1_G2
+    manu_ctx.loc_tim = manu_ctx.config->Y1_dur;
     if (manu_ctx.disp_data != NULL)
     {
         manu_ctx.disp_data->countdown_road1 = manu_ctx.loc_tim;

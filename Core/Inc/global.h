@@ -24,7 +24,6 @@
 #define DEFAULT_GREEN 3U
 
 // Manual mode fixed Amber buffer duration (3 seconds)
-#define MANUAL_AMBER_DUR 3U
 
 // System state/mode
 typedef enum
