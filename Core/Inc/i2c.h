@@ -40,7 +40,8 @@ extern I2C_HandleTypeDef hi2c1;
 void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void I2C1_Bus_Recover(void);
+void I2C1_Recover_If_Stuck(HAL_StatusTypeDef st);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

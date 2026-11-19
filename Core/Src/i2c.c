@@ -113,7 +113,71 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 }
 
 /* USER CODE BEGIN 1 */
+/* USER CODE BEGIN 1 */
+static void i2c_short_delay(void)
+{
+  for (volatile uint32_t d = 0; d < 25; d++) { __NOP(); }
+}
 
+void I2C1_Bus_Recover(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* 1. Ngat ngoai vi I2C1 */
+  HAL_I2C_DeInit(&hi2c1);
+
+  /* 2. Chuyen PB8 (SCL) va PB9 (SDA) sang GPIO Output Open-Drain */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_SET);
+
+  GPIO_InitStruct.Pin   = GPIO_PIN_8 | GPIO_PIN_9;
+  GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull  = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  i2c_short_delay();
+
+  /* 3. Phat 9 xung clock tren SCL de giai phong slave dang keo giu SDA */
+  for (uint8_t i = 0; i < 9; i++)
+  {
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
+    i2c_short_delay();
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+    i2c_short_delay();
+  }
+
+  /* 4. Tao dieu kien STOP thu cong: SDA=0 -> SCL=1 -> SDA=1 */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);
+  i2c_short_delay();
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+  i2c_short_delay();
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+  i2c_short_delay();
+
+  /* 5. Reset cung khoi I2C1 qua RCC de xoa triet de co BUSY (Errata STM32F1) */
+  __HAL_RCC_I2C1_FORCE_RESET();
+  i2c_short_delay();
+  __HAL_RCC_I2C1_RELEASE_RESET();
+
+  /* 6. Khoi tao lai I2C1 (tu dong remap lai PB8/PB9 sang AF_OD) */
+  MX_I2C1_Init();
+}
+
+void I2C1_Recover_If_Stuck(HAL_StatusTypeDef st)
+{
+  if (st == HAL_OK)
+    return;
+
+  uint32_t err = HAL_I2C_GetError(&hi2c1);
+  if (st == HAL_BUSY ||
+      st == HAL_TIMEOUT ||
+      __HAL_I2C_GET_FLAG(&hi2c1, I2C_FLAG_BUSY) != RESET ||
+      (err & (HAL_I2C_ERROR_BERR | HAL_I2C_ERROR_ARLO)) != 0U)
+  {
+    I2C1_Bus_Recover();
+  }
+}
+/* USER CODE END 1 */
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

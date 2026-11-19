@@ -1,4 +1,5 @@
 #include "dht20.h"
+#include "i2c.h"
 
 #define DHT20_ADDR8      ((uint8_t)(DHT20_I2C_ADDR << 1))   /* = 0x70 cho HAL */
 #define DHT20_TIMEOUT_MS 20
@@ -20,21 +21,24 @@ static DHT20_Status dht20_reset_register(uint8_t reg)
 {
     uint8_t cmd[3] = { reg, 0x00, 0x00 };
     uint8_t rx[3]  = { 0x00, 0x00, 0x00 };
+    HAL_StatusTypeDef st;
 
     if (dht20_i2c == NULL)
         return DHT20_ERR_I2C;
-    if (HAL_I2C_Master_Transmit(dht20_i2c, DHT20_ADDR8, cmd, 3, DHT20_TIMEOUT_MS) != HAL_OK)
-        return DHT20_ERR_I2C;
+
+    st = HAL_I2C_Master_Transmit(dht20_i2c, DHT20_ADDR8, cmd, 3, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) { I2C1_Recover_If_Stuck(st); return DHT20_ERR_I2C; }
     HAL_Delay(5);
-    if (HAL_I2C_Master_Receive(dht20_i2c, DHT20_ADDR8, rx, 3, DHT20_TIMEOUT_MS) != HAL_OK)
-        return DHT20_ERR_I2C;
+
+    st = HAL_I2C_Master_Receive(dht20_i2c, DHT20_ADDR8, rx, 3, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) { I2C1_Recover_If_Stuck(st); return DHT20_ERR_I2C; }
     HAL_Delay(10);
 
     cmd[0] = (uint8_t)(0xB0 | reg);
     cmd[1] = rx[1];
     cmd[2] = rx[2];
-    if (HAL_I2C_Master_Transmit(dht20_i2c, DHT20_ADDR8, cmd, 3, DHT20_TIMEOUT_MS) != HAL_OK)
-        return DHT20_ERR_I2C;
+    st = HAL_I2C_Master_Transmit(dht20_i2c, DHT20_ADDR8, cmd, 3, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) { I2C1_Recover_If_Stuck(st); return DHT20_ERR_I2C; }
 
     return DHT20_OK;
 }
@@ -42,15 +46,17 @@ static DHT20_Status dht20_reset_register(uint8_t reg)
 DHT20_Status dht20_init(I2C_HandleTypeDef *hi2c)
 {
     uint8_t cmd = 0x71, status = 0;
+    HAL_StatusTypeDef st;
     if (hi2c == NULL)
         return DHT20_ERR_I2C;
     dht20_i2c = hi2c;
 
     HAL_Delay(100);
-    if (HAL_I2C_Master_Transmit(hi2c, DHT20_ADDR8, &cmd, 1, DHT20_TIMEOUT_MS) != HAL_OK)
-        return DHT20_ERR_I2C;
-    if (HAL_I2C_Master_Receive(hi2c, DHT20_ADDR8, &status, 1, DHT20_TIMEOUT_MS) != HAL_OK)
-        return DHT20_ERR_I2C;
+    st = HAL_I2C_Master_Transmit(hi2c, DHT20_ADDR8, &cmd, 1, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) { I2C1_Recover_If_Stuck(st); return DHT20_ERR_I2C; }
+
+    st = HAL_I2C_Master_Receive(hi2c, DHT20_ADDR8, &status, 1, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) { I2C1_Recover_If_Stuck(st); return DHT20_ERR_I2C; }
 
     if ((status & 0x18) != 0x18) {
         if (dht20_reset_register(0x1B) != DHT20_OK) return DHT20_ERR_I2C;
@@ -66,8 +72,12 @@ DHT20_Status dht20_trigger(void)
     uint8_t cmd[3] = { 0xAC, 0x33, 0x00 };
     if (dht20_i2c == NULL)
         return DHT20_ERR_I2C;
-    if (HAL_I2C_Master_Transmit(dht20_i2c, DHT20_ADDR8, cmd, 3, DHT20_TIMEOUT_MS) != HAL_OK)
+
+    HAL_StatusTypeDef st = HAL_I2C_Master_Transmit(dht20_i2c, DHT20_ADDR8, cmd, 3, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) {
+        I2C1_Recover_If_Stuck(st);
         return DHT20_ERR_I2C;
+    }
     return DHT20_OK;
 }
 
@@ -76,8 +86,12 @@ DHT20_Status dht20_read(int16_t *temp_x10, uint16_t *hum_x10)
     uint8_t rx[7] = {0};
     if (dht20_i2c == NULL || temp_x10 == NULL || hum_x10 == NULL)
         return DHT20_ERR_I2C;
-    if (HAL_I2C_Master_Receive(dht20_i2c, DHT20_ADDR8, rx, 7, DHT20_TIMEOUT_MS) != HAL_OK)
+
+    HAL_StatusTypeDef st = HAL_I2C_Master_Receive(dht20_i2c, DHT20_ADDR8, rx, 7, DHT20_TIMEOUT_MS);
+    if (st != HAL_OK) {
+        I2C1_Recover_If_Stuck(st);
         return DHT20_ERR_I2C;
+    }
     if (rx[0] & 0x80)               return DHT20_ERR_BUSY;
     if (dht20_crc8(rx, 6) != rx[6]) return DHT20_ERR_CRC;
 
