@@ -57,9 +57,12 @@ typedef struct
 typedef enum
 {
     EDIT_NONE = 0,
-    EDIT_RED,
-    EDIT_AMBER,
-    EDIT_GREEN
+    EDIT_R1,
+    EDIT_Y1,
+    EDIT_G1,
+    EDIT_R2,
+    EDIT_Y2,
+    EDIT_G2
 } Setting_Field;
 
 typedef struct

@@ -26,5 +26,5 @@ void    lcd_flush_task(void);
 void    lcd_clear(void);                 /* blocking ~2 ms, chi dung luc init */
 void    lcd_set_backlight(uint8_t on);
 uint8_t lcd_is_ok(void);                 /* 1 neu lan giao tiep I2C gan nhat thanh cong */
-
+uint8_t lcd_is_soft_i2c(void);
 #endif /* INC_LCD_H_ */

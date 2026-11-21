@@ -1,6 +1,6 @@
 #include "dht20.h"
 #include "i2c.h"
-
+#include "lcd.h"
 #define DHT20_ADDR8      ((uint8_t)(DHT20_I2C_ADDR << 1))   /* = 0x70 cho HAL */
 #define DHT20_TIMEOUT_MS 20
 
@@ -45,6 +45,7 @@ static DHT20_Status dht20_reset_register(uint8_t reg)
 
 DHT20_Status dht20_init(I2C_HandleTypeDef *hi2c)
 {
+	if (lcd_is_soft_i2c()) return DHT20_ERR_I2C;
     uint8_t cmd = 0x71, status = 0;
     HAL_StatusTypeDef st;
     if (hi2c == NULL)
@@ -69,6 +70,7 @@ DHT20_Status dht20_init(I2C_HandleTypeDef *hi2c)
 
 DHT20_Status dht20_trigger(void)
 {
+	if (lcd_is_soft_i2c()) return DHT20_ERR_I2C;
     uint8_t cmd[3] = { 0xAC, 0x33, 0x00 };
     if (dht20_i2c == NULL)
         return DHT20_ERR_I2C;
@@ -83,6 +85,7 @@ DHT20_Status dht20_trigger(void)
 
 DHT20_Status dht20_read(int16_t *temp_x10, uint16_t *hum_x10)
 {
+	if (lcd_is_soft_i2c()) return DHT20_ERR_I2C;
     uint8_t rx[7] = {0};
     if (dht20_i2c == NULL || temp_x10 == NULL || hum_x10 == NULL)
         return DHT20_ERR_I2C;

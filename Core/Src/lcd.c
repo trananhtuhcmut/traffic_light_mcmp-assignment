@@ -220,6 +220,7 @@ void lcd_set_backlight(uint8_t on)
 }
 
 uint8_t lcd_is_ok(void) { return lcd_ok; }
+uint8_t lcd_is_soft_i2c(void) { return lcd_use_soft_i2c; }
 
 void lcd_put_line(uint8_t row, const char *str)
 {

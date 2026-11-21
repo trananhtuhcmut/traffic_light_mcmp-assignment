@@ -73,18 +73,24 @@ void display_task(void)
                     snprintf(l0, sizeof l0, "MANUAL MODE");
                 }
                 break;
-
             case MODE_SETTING:
-            {
-                const char *field_name = "---";
-                if (curr_disp_data.active_field == EDIT_RED)        field_name = "RED";
-                else if (curr_disp_data.active_field == EDIT_AMBER) field_name = "AMB";
-                else if (curr_disp_data.active_field == EDIT_GREEN) field_name = "GRN";
+                        {
+                            const char *field_name = "--";
+                            switch (curr_disp_data.active_field)
+                            {
+                                case EDIT_R1: field_name = "R1"; break;
+                                case EDIT_Y1: field_name = "Y1"; break;
+                                case EDIT_G1: field_name = "G1"; break;
+                                case EDIT_R2: field_name = "R2"; break;
+                                case EDIT_Y2: field_name = "Y2"; break;
+                                case EDIT_G2: field_name = "G2"; break;
+                                default: break;
+                            }
 
-                snprintf(l0, sizeof l0, "SET %s: %02us",
-                         field_name, (unsigned)curr_disp_data.draft_duration);
-                break;
-            }
+                            snprintf(l0, sizeof l0, "SET %s: %02us",
+                                     field_name, (unsigned)curr_disp_data.draft_duration);
+                            break;
+                        }
 
             default:
                 snprintf(l0, sizeof l0, "TRAFFIC SYSTEM");

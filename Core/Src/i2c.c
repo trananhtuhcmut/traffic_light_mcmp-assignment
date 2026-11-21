@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "i2c.h"
+#include "lcd.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -165,7 +166,8 @@ void I2C1_Bus_Recover(void)
 
 void I2C1_Recover_If_Stuck(HAL_StatusTypeDef st)
 {
-  if (st == HAL_OK)
+  /* Bo qua reset cung I2C1 khi dang chay che do Soft-I2C tren Proteus */
+  if (st == HAL_OK || lcd_is_soft_i2c())
     return;
 
   uint32_t err = HAL_I2C_GetError(&hi2c1);
