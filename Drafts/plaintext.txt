@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+[*]-->MODE_AUTO: Mode change (button 1) from MODE_SETTING
+state MODE_AUTO{
+[*]-->R1_G2: TICK_1S [else] / 
+state R1_G2{
+R1_G2: entry /
+R1_G2: Y1 off, R2 off, G2 on, R1 on
+R1_G2: Load G2_timer
+R1_G2: Load R1 timer
+R1_G2: Display to LCD(G2_timer)
+R1_G2: Display to LCD(R1_timer)
+R1_G2:
+R1_G2: TICK_1S [G2_timer > 0] /
+R1_G2: G2_timer--
+R1_G2: R1_timer--
+R1_G2: Display to LCD(G2_timer)
+R1_G2: Display to LCD(R1_timer)
+R1_G2:
+R1_G2: /
+R1_G2: return
+}
+R1_G2-->R1_Y2: TICK_1S [else] / 
+state R1_Y2{
+R1_Y2: entry/
+R1_Y2: G2 off, Y2 on
+R1_Y2: Load Y2_timer
+R1_Y2: Display to LCD(Y2_timer)
+R1_Y2: Display to LCD(R1_timer)
+R1_Y2:
+R1_Y2: TICK_1S [Y2_timer > 0]/
+R1_Y2: Y2_timer--
+R1_Y2: R1_timer--
+R1_Y2: Display to LCD(Y2_timer)
+R1_Y2: Display to LCD(R1_timer)
+R1_Y2:
+R1_Y2: /
+R1_Y2: return
+}
+R1_Y2-->G1_R2: TICK_1S [else] / 
+state G1_R2{
+G1_R2: entry/
+G1_R2: Y2 off, R1 off, G1 on, R2 on
+G1_R2: Load G1_timer
+G1_R2: Load R2_timer
+G1_R2: Display to LCD(G1_timer)
+G1_R2: Display to LCD(R2_timer)
+G1_R2:
+G1_R2: TICK_1S [G1_timer > 0]/
+G1_R2: G1_timer--
+G1_R2: R2_timer--
+G1_R2: Display to LCD(G1_timer)
+G1_R2: Display to LCD(R2_timer)
+G1_R2:
+G1_R2: /
+G1_R2: return
+}
+G1_R2-->Y1_R2: TICK_1S [else] / 
+state Y1_R2{
+Y1_R2: entry/
+Y1_R2: G1 off, Y1 on
+Y1_R2: Load Y1_timer
+Y1_R2: Display to LCD(Y1_timer)
+Y1_R2: Display to LCD(R2_timer)
+Y1_R2:
+Y1_R2: TICK_1S [Y1_timer > 0]/
+Y1_R2: Y1_timer--
+Y1_R2: R2_timer--
+Y1_R2: Display to LCD(Y1_timer)
+Y1_R2: Display to LCD(R2_timer)
+Y1_R2:
+Y1_R2: /
+Y1_R2: return
+}
+Y1_R2-->R1_G2: TICK_1S [else] / 
+}
+MODE_AUTO-->[*]: Mode change (button 1) to MODE_MANUAL
+@enduml

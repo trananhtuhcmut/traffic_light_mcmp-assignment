@@ -1,4 +1,4 @@
-<mxfile host="Electron" pages="6">
+<mxfile host="Electron" pages="7">
   <diagram name="fsm_auto" id="zhPx16-dynA9dSH7rh0R">
     <mxGraphModel dx="1601" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -299,133 +299,147 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-25" edge="1" parent="1" source="chbCixlPbGKwTbUbXoKq-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=15;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="8zKOeWrbNoASRwBsYzcf-24" value="MODE_CHANGE">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="790" y="305" />
-              <mxPoint x="790" y="55" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="chbCixlPbGKwTbUbXoKq-1" parent="1" style="shape=mxgraph.sysml.compState;html=1;align=left;verticalAlign=top;spacingTop=-3;spacingLeft=18;container=0;" value="MODE_AUTO" vertex="1">
-          <mxGeometry height="960" width="700" x="10" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="97O2BPzFnUt-9QXdsh4H-22" parent="1" style="ellipse;fillColor=strokeColor;html=1;container=0;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="670" y="80" as="geometry" />
-        </mxCell>
-        <mxCell id="97O2BPzFnUt-9QXdsh4H-23" edge="1" parent="1" source="97O2BPzFnUt-9QXdsh4H-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;align=left;" target="97O2BPzFnUt-9QXdsh4H-45" value="">
-          <mxGeometry relative="1" x="0.5738" y="-15" as="geometry">
-            <mxPoint as="offset" />
-            <mxPoint x="305" y="250" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-18" edge="1" parent="1" source="97O2BPzFnUt-9QXdsh4H-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="97O2BPzFnUt-9QXdsh4H-46" value="TICK_1S [else]/">
-          <mxGeometry relative="1" x="0.035" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="580" y="220" />
-              <mxPoint x="580" y="388.33" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-20" edge="1" parent="1" source="97O2BPzFnUt-9QXdsh4H-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="97O2BPzFnUt-9QXdsh4H-47" value="TICK_1S [else]/">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="580" y="436" />
-              <mxPoint x="580" y="603" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-21" edge="1" parent="1" source="97O2BPzFnUt-9QXdsh4H-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="97O2BPzFnUt-9QXdsh4H-48" value="TICK_1S [else]/">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="580" y="653" />
-              <mxPoint x="580" y="830" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-23" edge="1" parent="1" source="97O2BPzFnUt-9QXdsh4H-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="97O2BPzFnUt-9QXdsh4H-45" value="TICK_1S [else]/">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="100" y="830" />
-              <mxPoint x="100" y="270" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-9" parent="1" style="ellipse;fillColor=strokeColor;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="820" y="-20" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-10" edge="1" parent="1" source="8zKOeWrbNoASRwBsYzcf-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=20;entryPerimeter=0;defaultLabelBackgroundColor=page;" target="chbCixlPbGKwTbUbXoKq-1" value="&lt;span style=&quot;text-align: left;&quot;&gt;MODE_CHANGE(from MODE_SETTING)&lt;/span&gt;">
-          <mxGeometry relative="1" x="-0.2212" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-24" parent="1" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="820" y="40" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-28" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="200" width="320" x="180" y="120" as="geometry" />
-        </mxCell>
-        <mxCell id="97O2BPzFnUt-9QXdsh4H-45" parent="8zKOeWrbNoASRwBsYzcf-28" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;container=0;" value="R1 - G2" vertex="1">
-          <mxGeometry height="200" width="320" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-3" parent="8zKOeWrbNoASRwBsYzcf-28" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_1S [G2_timer &amp;gt; 0]/&lt;div&gt;G2_timer--&lt;/div&gt;&lt;div&gt;R1_timer--&lt;/div&gt;&lt;div&gt;Display to LCD(G2_timer)&lt;/div&gt;&lt;div&gt;Display to LCD(R1_timer)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="150" x="10" y="110" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-12" parent="8zKOeWrbNoASRwBsYzcf-28" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Y1 off, R2 off, G2 on, R1 on&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Load G2_timer&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Load R1 timer&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(G2_timer)&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(R1_timer)&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="130" x="10" y="20" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-33" parent="8zKOeWrbNoASRwBsYzcf-28" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="/&lt;div&gt;return&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="180" y="100" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-29" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="190" width="320" x="180" y="341" as="geometry" />
-        </mxCell>
-        <mxCell id="97O2BPzFnUt-9QXdsh4H-46" parent="8zKOeWrbNoASRwBsYzcf-29" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;container=0;" value="R1 - Y2" vertex="1">
-          <mxGeometry height="190" width="320" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-4" parent="8zKOeWrbNoASRwBsYzcf-29" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_1S [Y2_timer &amp;gt; 0]/&lt;div&gt;Y2_timer--&lt;/div&gt;&lt;div&gt;R1_timer--&lt;/div&gt;&lt;div&gt;Display to LCD(Y2_timer)&lt;/div&gt;&lt;div&gt;Display to LCD(R1_timer)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="150" x="10" y="100" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-15" parent="8zKOeWrbNoASRwBsYzcf-29" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;&lt;span style=&quot;font-size: 11px; white-space: nowrap; background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;G2 off, Y2 on&lt;/span&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Load Y2_timer&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(Y2_timer)&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(R1_timer)&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="130" x="10" y="20" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-34" parent="8zKOeWrbNoASRwBsYzcf-29" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="/&lt;div&gt;return&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="180" y="89" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-30" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="200" width="320" x="180" y="553" as="geometry" />
-        </mxCell>
-        <mxCell id="97O2BPzFnUt-9QXdsh4H-47" parent="8zKOeWrbNoASRwBsYzcf-30" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;container=0;" value="G1 - R2" vertex="1">
-          <mxGeometry height="200" width="320" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-6" parent="8zKOeWrbNoASRwBsYzcf-30" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_1S [G1_timer &amp;gt; 0]/&lt;div&gt;G1_timer--&lt;/div&gt;&lt;div&gt;R2_timer--&lt;/div&gt;&lt;div&gt;Display to LCD(G1_timer)&lt;/div&gt;&lt;div&gt;Display to LCD(R2_timer)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="150" x="10" y="105" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-16" parent="8zKOeWrbNoASRwBsYzcf-30" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Y2 off, R1 off, G1 on, R2 on&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Load G1_timer&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Load R2_timer&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(G1_timer)&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(R2_timer)&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="130" x="10" y="25" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-36" parent="8zKOeWrbNoASRwBsYzcf-30" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="/&lt;div&gt;return&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="190" y="97" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-32" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="200" width="320" x="180" y="780" as="geometry" />
-        </mxCell>
-        <mxCell id="97O2BPzFnUt-9QXdsh4H-48" parent="8zKOeWrbNoASRwBsYzcf-32" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;container=0;" value="Y1 - R2" vertex="1">
-          <mxGeometry height="200" width="320" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-7" parent="8zKOeWrbNoASRwBsYzcf-32" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_1S [Y1_timer &amp;gt; 0]/&lt;div&gt;Y1_timer--&lt;/div&gt;&lt;div&gt;R2_timer--&lt;/div&gt;&lt;div&gt;Display to LCD(Y1_timer)&lt;/div&gt;&lt;div&gt;Display to LCD(R2_timer)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="150" x="10" y="97" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-17" parent="8zKOeWrbNoASRwBsYzcf-32" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;G1 off, Y1 on&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Load Y1_timer&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(Y1_timer)&lt;/div&gt;&lt;div style=&quot;font-size: 11px; white-space: nowrap;&quot;&gt;Display to LCD(R2_timer)&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="80" width="130" x="11" y="17" as="geometry" />
-        </mxCell>
-        <mxCell id="8zKOeWrbNoASRwBsYzcf-37" parent="8zKOeWrbNoASRwBsYzcf-32" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="/&lt;div&gt;return&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="190" y="85" as="geometry" />
-        </mxCell>
-        <mxCell id="_7IX2vT7FJXp-df5_pZR-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=16;" value="FSM now doesn&#39;t call peripheral functions. It shall only modify its own context." vertex="1">
-          <mxGeometry height="120" width="250" x="-360" y="80" as="geometry" />
-        </mxCell>
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\nleft to right direction\n\n[*]--&gt;MODE_AUTO: Mode change (button 1) from MODE_SETTING\nstate MODE_AUTO{\n[*]--&gt;R1_G2: TICK_1S [else] / \nstate R1_G2{\nR1_G2: entry /\nR1_G2: Y1 off, R2 off, G2 on, R1 on\nR1_G2: Load G2_timer\nR1_G2: Load R1 timer\nR1_G2: Display to LCD(G2_timer)\nR1_G2: Display to LCD(R1_timer)\nR1_G2:\nR1_G2: TICK_1S [G2_timer &gt; 0] /\nR1_G2: G2_timer--\nR1_G2: R1_timer--\nR1_G2: Display to LCD(G2_timer)\nR1_G2: Display to LCD(R1_timer)\nR1_G2:\nR1_G2: /\nR1_G2: return\n}\nR1_G2--&gt;R1_Y2: TICK_1S [else] / \nstate R1_Y2{\nR1_Y2: entry/\nR1_Y2: G2 off, Y2 on\nR1_Y2: Load Y2_timer\nR1_Y2: Display to LCD(Y2_timer)\nR1_Y2: Display to LCD(R1_timer)\nR1_Y2:\nR1_Y2: TICK_1S [Y2_timer &gt; 0]/\nR1_Y2: Y2_timer--\nR1_Y2: R1_timer--\nR1_Y2: Display to LCD(Y2_timer)\nR1_Y2: Display to LCD(R1_timer)\nR1_Y2:\nR1_Y2: /\nR1_Y2: return\n}\nR1_Y2--&gt;G1_R2: TICK_1S [else] / \nstate G1_R2{\nG1_R2: entry/\nG1_R2: Y2 off, R1 off, G1 on, R2 on\nG1_R2: Load G1_timer\nG1_R2: Load R2_timer\nG1_R2: Display to LCD(G1_timer)\nG1_R2: Display to LCD(R2_timer)\nG1_R2:\nG1_R2: TICK_1S [G1_timer &gt; 0]/\nG1_R2: G1_timer--\nG1_R2: R2_timer--\nG1_R2: Display to LCD(G1_timer)\nG1_R2: Display to LCD(R2_timer)\nG1_R2:\nG1_R2: /\nG1_R2: return\n}\nG1_R2--&gt;Y1_R2: TICK_1S [else] / \nstate Y1_R2{\nY1_R2: entry/\nY1_R2: G1 off, Y1 on\nY1_R2: Load Y1_timer\nY1_R2: Display to LCD(Y1_timer)\nY1_R2: Display to LCD(R2_timer)\nY1_R2:\nY1_R2: TICK_1S [Y1_timer &gt; 0]/\nY1_R2: Y1_timer--\nY1_R2: R2_timer--\nY1_R2: Display to LCD(Y1_timer)\nY1_R2: Display to LCD(R2_timer)\nY1_R2:\nY1_R2: /\nY1_R2: return\n}\nY1_R2--&gt;R1_G2: TICK_1S [else] / \n}\nMODE_AUTO--&gt;[*]: Mode change (button 1) to MODE_MANUAL\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="WB0bKNWjmt8RGk-yFaOn-1">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10 159 10 10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="s_0" plantUmlBaseStyle="ellipse;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="WB0bKNWjmt8RGk-yFaOn-2">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-1" style="ellipse;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="20" width="20" x="830" y="-110" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MODE_AUTO" plantUmlId="s_1" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;fillColor=#F1F1F1;swimlaneFillColor=#FFFFFF;strokeColor=#181818;strokeWidth=0.5;rounded=1;absoluteArcSize=1;arcSize=25;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;" plantUmlBaseValue="MODE_AUTO" id="WB0bKNWjmt8RGk-yFaOn-3">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-1" style="swimlane;collapsible=0;startSize=26;fillColor=#F1F1F1;swimlaneFillColor=#FFFFFF;strokeColor=#181818;strokeWidth=0.5;rounded=1;absoluteArcSize=1;arcSize=25;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;" vertex="1">
+            <mxGeometry height="823.22" width="740" x="-30" y="-43.22000000000003" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="sc_2" plantUmlBaseStyle="ellipse;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="WB0bKNWjmt8RGk-yFaOn-4">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-3" style="ellipse;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="20" width="20" x="690" y="43.22" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="R1_G2" plantUmlId="sc_3" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="R1_G2" id="WB0bKNWjmt8RGk-yFaOn-5">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="296.78" width="220" x="50" y="103.22" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry /&#xa;Y1 off, R2 off, G2 on, R1 on&#xa;Load G2_timer&#xa;Load R1 timer&#xa;Display to LCD(G2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;TICK_1S [G2_timer &amp;gt; 0] /&#xa;G2_timer--&#xa;R1_timer--&#xa;Display to LCD(G2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;/&#xa;return" plantUmlId="sdesc_4" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry /&#xa;Y1 off, R2 off, G2 on, R1 on&#xa;Load G2_timer&#xa;Load R1 timer&#xa;Display to LCD(G2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;TICK_1S [G2_timer &amp;gt; 0] /&#xa;G2_timer--&#xa;R1_timer--&#xa;Display to LCD(G2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;/&#xa;return" id="WB0bKNWjmt8RGk-yFaOn-6">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-5" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="254" width="209" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="R1_Y2" plantUmlId="sc_5" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="R1_Y2" id="WB0bKNWjmt8RGk-yFaOn-7">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="296.78" width="220" x="50" y="483.22" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;G2 off, Y2 on&#xa;Load Y2_timer&#xa;Display to LCD(Y2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;TICK_1S [Y2_timer &amp;gt; 0]/&#xa;Y2_timer--&#xa;R1_timer--&#xa;Display to LCD(Y2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;/&#xa;return" plantUmlId="sdesc_6" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;G2 off, Y2 on&#xa;Load Y2_timer&#xa;Display to LCD(Y2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;TICK_1S [Y2_timer &amp;gt; 0]/&#xa;Y2_timer--&#xa;R1_timer--&#xa;Display to LCD(Y2_timer)&#xa;Display to LCD(R1_timer)&#xa;&#xa;/&#xa;return" id="WB0bKNWjmt8RGk-yFaOn-8">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-7" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="190" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="G1_R2" plantUmlId="sc_7" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="G1_R2" id="WB0bKNWjmt8RGk-yFaOn-9">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="296.78" width="220" x="480.5" y="483.22" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Y2 off, R1 off, G1 on, R2 on&#xa;Load G1_timer&#xa;Load R2_timer&#xa;Display to LCD(G1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;TICK_1S [G1_timer &amp;gt; 0]/&#xa;G1_timer--&#xa;R2_timer--&#xa;Display to LCD(G1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;/&#xa;return" plantUmlId="sdesc_8" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Y2 off, R1 off, G1 on, R2 on&#xa;Load G1_timer&#xa;Load R2_timer&#xa;Display to LCD(G1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;TICK_1S [G1_timer &amp;gt; 0]/&#xa;G1_timer--&#xa;R2_timer--&#xa;Display to LCD(G1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;/&#xa;return" id="WB0bKNWjmt8RGk-yFaOn-10">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-9" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="254" width="209" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Y1_R2" plantUmlId="sc_9" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Y1_R2" id="WB0bKNWjmt8RGk-yFaOn-11">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="296.78" width="220" x="480.5" y="103.22" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;G1 off, Y1 on&#xa;Load Y1_timer&#xa;Display to LCD(Y1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;TICK_1S [Y1_timer &amp;gt; 0]/&#xa;Y1_timer--&#xa;R2_timer--&#xa;Display to LCD(Y1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;/&#xa;return" plantUmlId="sdesc_10" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;G1 off, Y1 on&#xa;Load Y1_timer&#xa;Display to LCD(Y1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;TICK_1S [Y1_timer &amp;gt; 0]/&#xa;Y1_timer--&#xa;R2_timer--&#xa;Display to LCD(Y1_timer)&#xa;Display to LCD(R2_timer)&#xa;&#xa;/&#xa;return" id="WB0bKNWjmt8RGk-yFaOn-12">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-11" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="190" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else] /" plantUmlId="t_13" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else] /" id="WB0bKNWjmt8RGk-yFaOn-15">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-3" source="WB0bKNWjmt8RGk-yFaOn-4" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="WB0bKNWjmt8RGk-yFaOn-5">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="190" y="53.22000000000003" />
+                <mxPoint x="157.73000000000002" y="96" />
+              </Array>
+              <mxPoint x="164.45000000000002" y="66" as="sourcePoint" />
+              <mxPoint x="164.79" y="146.27999999999997" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else] /" plantUmlId="t_14" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else] /" id="WB0bKNWjmt8RGk-yFaOn-16">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-3" source="WB0bKNWjmt8RGk-yFaOn-5" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="WB0bKNWjmt8RGk-yFaOn-7">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="129.96" y="467.23" />
+              </Array>
+              <mxPoint x="129.96" y="426.28" as="sourcePoint" />
+              <mxPoint x="119.61000000000001" y="515.6400000000001" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else] /" plantUmlId="t_17" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else] /" id="WB0bKNWjmt8RGk-yFaOn-19">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-3" source="WB0bKNWjmt8RGk-yFaOn-12" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="WB0bKNWjmt8RGk-yFaOn-5">
+            <mxGeometry relative="1" x="0.2403" y="3" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points" />
+              <mxPoint x="227.35" y="1227.3799999999999" as="sourcePoint" />
+              <mxPoint x="199.63" y="426.28" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else] /" plantUmlId="t_15" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else] /" id="WB0bKNWjmt8RGk-yFaOn-17">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-3" source="WB0bKNWjmt8RGk-yFaOn-8" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="WB0bKNWjmt8RGk-yFaOn-10">
+            <mxGeometry relative="1" x="-0.4064" y="-1.71" as="geometry">
+              <Array as="points" />
+              <mxPoint x="119.61000000000001" y="779.6400000000001" as="sourcePoint" />
+              <mxPoint x="124.5" y="857.6800000000001" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else] /" plantUmlId="t_16" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else] /" id="WB0bKNWjmt8RGk-yFaOn-18">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-3" source="WB0bKNWjmt8RGk-yFaOn-9" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="WB0bKNWjmt8RGk-yFaOn-11">
+            <mxGeometry relative="1" x="-0.1392" y="24.47" as="geometry">
+              <Array as="points" />
+              <mxPoint x="124.5" y="1137.68" as="sourcePoint" />
+              <mxPoint x="164.02" y="1227.3799999999999" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="s_11" plantUmlBaseStyle="shape=endState;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="WB0bKNWjmt8RGk-yFaOn-13">
+          <mxCell parent="WB0bKNWjmt8RGk-yFaOn-1" style="shape=endState;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="24" width="24" x="845" y="10" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Mode change (button 1) from MODE_SETTING" plantUmlId="t_12" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Mode change (button 1) from MODE_SETTING" id="WB0bKNWjmt8RGk-yFaOn-14">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-1" source="WB0bKNWjmt8RGk-yFaOn-2" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="WB0bKNWjmt8RGk-yFaOn-3">
+            <mxGeometry relative="1" x="0.8121" y="-26" as="geometry">
+              <mxPoint x="-1" as="offset" />
+              <Array as="points">
+                <mxPoint x="620" y="-90" />
+              </Array>
+              <mxPoint x="121.99000000000001" y="-120" as="sourcePoint" />
+              <mxPoint x="125.34" y="-43.22000000000003" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="Mode change (button 1) to MODE_MANUAL" plantUmlId="t_18" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Mode change (button 1) to MODE_MANUAL" id="WB0bKNWjmt8RGk-yFaOn-20">
+          <mxCell edge="1" parent="WB0bKNWjmt8RGk-yFaOn-1" source="WB0bKNWjmt8RGk-yFaOn-3" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" target="WB0bKNWjmt8RGk-yFaOn-13">
+            <mxGeometry relative="1" x="-0.6198" y="50" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="760" y="160" />
+                <mxPoint x="820" y="140" />
+              </Array>
+              <mxPoint x="125.34" y="1468.1599999999999" as="sourcePoint" />
+              <mxPoint x="125.34" y="1544.1599999999999" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
       </root>
     </mxGraphModel>
   </diagram>
@@ -434,235 +448,349 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-4" edge="1" parent="1" source="tXXXmCPw1cY4fSvFcyBc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=10;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="W7kkgAmfZ8LhyrROgKs9-2" value="MODE_CHANGE">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="tXXXmCPw1cY4fSvFcyBc-1" parent="1" style="shape=mxgraph.sysml.compState;html=1;align=left;verticalAlign=top;spacingTop=-3;spacingLeft=18;" value="MODE_MANUAL" vertex="1">
-          <mxGeometry height="560" width="590" x="-200" y="-100" as="geometry" />
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-5" edge="1" parent="1" source="tXXXmCPw1cY4fSvFcyBc-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="LiYa0fR3aaqdobt7HIyN-1" value="ROAD_SWITCH/">
-          <mxGeometry relative="1" x="0.0054" as="geometry">
-            <Array as="points">
-              <mxPoint x="320" y="40.28" />
-              <mxPoint x="320" y="104.86" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-7" edge="1" parent="1" source="kdXnPgbpkDm6DSmfcAgl-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="LiYa0fR3aaqdobt7HIyN-2" value="ROAD_SWITCH/">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="320" y="279.86" />
-              <mxPoint x="320" y="340.28" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-6" edge="1" parent="1" source="LiYa0fR3aaqdobt7HIyN-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="kdXnPgbpkDm6DSmfcAgl-1" value="TICK_1S [else]/">
-          <mxGeometry relative="1" x="0.1688" as="geometry">
-            <Array as="points">
-              <mxPoint x="260" y="159.7" />
-              <mxPoint x="320" y="159.7" />
-              <mxPoint x="320" y="240" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-8" edge="1" parent="1" source="LiYa0fR3aaqdobt7HIyN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="tXXXmCPw1cY4fSvFcyBc-2" value="TICK_1S [else]/">
-          <mxGeometry relative="1" x="-0.0213" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="-130" y="370" />
-              <mxPoint x="-130" y="20" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-4" edge="1" parent="1" source="LiYa0fR3aaqdobt7HIyN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="tXXXmCPw1cY4fSvFcyBc-2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-3" parent="1" style="ellipse;fillColor=strokeColor;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="350" y="-70" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-1" parent="1" style="ellipse;fillColor=strokeColor;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="510" y="-170" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-2" parent="1" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="510" y="-90" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-3" edge="1" parent="1" source="W7kkgAmfZ8LhyrROgKs9-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=20;entryPerimeter=0;defaultLabelBackgroundColor=page;" target="tXXXmCPw1cY4fSvFcyBc-1" value="MODE_CHANGE from MODE_AUTO">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-20" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="140" width="330" x="-70" y="70" as="geometry" />
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-1" parent="W7kkgAmfZ8LhyrROgKs9-20" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="R1 - Y2 (BUFFER)" vertex="1">
-          <mxGeometry height="140" width="330" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-18" parent="W7kkgAmfZ8LhyrROgKs9-20" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_1s [Y2_timer &amp;gt; 0]/&lt;div&gt;loc_tim--&lt;/div&gt;" vertex="1">
-          <mxGeometry height="58.33" width="160" x="10" y="78.33" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-19" parent="W7kkgAmfZ8LhyrROgKs9-20" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;G2 off, Y2 on&lt;/div&gt;&lt;div&gt;load loc_tim with Y2_dur&lt;/div&gt;" vertex="1">
-          <mxGeometry height="58.33" width="170" x="10" y="20" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-23" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="120" width="330" x="-70" y="310" as="geometry" />
-        </mxCell>
-        <mxCell id="LiYa0fR3aaqdobt7HIyN-2" parent="W7kkgAmfZ8LhyrROgKs9-23" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="Y1 - R2 (BUFFER)" vertex="1">
-          <mxGeometry height="120" width="330" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-21" parent="W7kkgAmfZ8LhyrROgKs9-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_1s [Y1_timer &amp;gt; 0]/&lt;div&gt;loc_tim--&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="250" x="10" y="70" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-22" parent="W7kkgAmfZ8LhyrROgKs9-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;G1 off, Y1 on&lt;/div&gt;&lt;div&gt;load loc_tim with Y1_dur&lt;/div&gt;" vertex="1">
-          <mxGeometry height="40" width="250" x="10" y="20" as="geometry" />
-        </mxCell>
-        <mxCell id="tXXXmCPw1cY4fSvFcyBc-2" parent="1" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="R1 - G2 (MAN)" vertex="1">
-          <mxGeometry height="80" width="330" x="-70" y="-20" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;R1 on, G2 on&lt;/div&gt;" vertex="1">
-          <mxGeometry height="50" width="170" x="-60" as="geometry" />
-        </mxCell>
-        <mxCell id="kdXnPgbpkDm6DSmfcAgl-1" parent="1" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="G1 - R2 (MAN)" vertex="1">
-          <mxGeometry height="80" width="330" x="-70" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="W7kkgAmfZ8LhyrROgKs9-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;R1 off, G1 on, Y2 off, R2 on&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="160" x="-60" y="240" as="geometry" />
-        </mxCell>
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\n[*] --&gt; MODE_MANUAL : Mode change (button 1) from MODE_AUTO\n\nstate MODE_MANUAL {\n  state \&quot;R1 - G2 (MAN)\&quot; as R1_G2\n  state \&quot;R1 - Y2 (BUFFER)\&quot; as R1_Y2\n  state \&quot;G1 - R2 (MAN)\&quot; as G1_R2\n  state \&quot;Y1 - R2 (BUFFER)\&quot; as Y1_R2\n\n  [*] --&gt; R1_G2\n\n  R1_G2 : entry/\n  R1_G2 : R1 on, G2 on\n\n  R1_G2 --&gt; R1_Y2 : SWITCH_LIGHT /\n\n  R1_Y2 : entry/\n  R1_Y2 : G2 off, Y2 on\n  R1_Y2 : load Y2_dur\n  R1_Y2 :\n  R1_Y2 : TICK_1s [Y2_timer &gt; 0]/\n  R1_Y2 : Y2_dur--\n\n  R1_Y2 --&gt; G1_R2 : TICK_1S [else]/\n\n  G1_R2 : entry/\n  G1_R2 : R1 off, G1 on, Y2 off, R2 on\n\n  G1_R2 --&gt; Y1_R2 : SWITCH_LIGHT /\n\n  Y1_R2 : entry/\n  Y1_R2 : G1 off, Y1 on\n  Y1_R2 : load Y1_dur\n  Y1_R2 :\n  Y1_R2 : TICK_1s [Y1_timer &gt; 0]/\n  Y1_R2 : Y1_dur--\n\n  Y1_R2 --&gt; R1_G2 : TICK_1S [else]/\n}\n\nMODE_MANUAL --&gt; [*] : Mode change (button 1) to MODE_SETTING\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="ic6Nao8f41JtbyAwe6FB-1">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="s_0" plantUmlBaseStyle="ellipse;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="ic6Nao8f41JtbyAwe6FB-2">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-1" style="ellipse;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="20" width="20" x="560" y="70" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MODE_MANUAL" plantUmlId="s_1" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;fillColor=#F1F1F1;swimlaneFillColor=#FFFFFF;strokeColor=#181818;strokeWidth=0.5;rounded=1;absoluteArcSize=1;arcSize=25;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;" plantUmlBaseValue="MODE_MANUAL" id="ic6Nao8f41JtbyAwe6FB-3">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-1" style="swimlane;collapsible=0;startSize=26;fillColor=#F1F1F1;swimlaneFillColor=#FFFFFF;strokeColor=#181818;strokeWidth=0.5;rounded=1;absoluteArcSize=1;arcSize=25;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;" vertex="1">
+            <mxGeometry height="482.8" width="600" x="-140" y="107.20000000000005" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="R1 - G2 (MAN)" plantUmlId="sc_2" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="R1 - G2 (MAN)" id="ic6Nao8f41JtbyAwe6FB-4">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="72" width="120" x="20.459999999999994" y="82.80000000000001" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;R1 on, G2 on" plantUmlId="sdesc_3" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;R1 on, G2 on" id="ic6Nao8f41JtbyAwe6FB-5">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-4" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="46" width="120" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="R1 - Y2 (BUFFER)" plantUmlId="sc_4" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="R1 - Y2 (BUFFER)" id="ic6Nao8f41JtbyAwe6FB-6">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="136" width="182" x="280" y="52.80000000000001" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;G2 off, Y2 on&#xa;load Y2_dur&#xa;&#xa;TICK_1s [Y2_timer &amp;gt; 0]/&#xa;Y2_dur--" plantUmlId="sdesc_5" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;G2 off, Y2 on&#xa;load Y2_dur&#xa;&#xa;TICK_1s [Y2_timer &amp;gt; 0]/&#xa;Y2_dur--" id="ic6Nao8f41JtbyAwe6FB-7">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-6" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="110" width="182" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="G1 - R2 (MAN)" plantUmlId="sc_6" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="G1 - R2 (MAN)" id="ic6Nao8f41JtbyAwe6FB-8">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="72" width="209" x="370" y="354.79999999999995" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;R1 off, G1 on, Y2 off, R2 on" plantUmlId="sdesc_7" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;R1 off, G1 on, Y2 off, R2 on" id="ic6Nao8f41JtbyAwe6FB-9">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-8" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="46" width="209" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Y1 - R2 (BUFFER)" plantUmlId="sc_8" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Y1 - R2 (BUFFER)" id="ic6Nao8f41JtbyAwe6FB-10">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-3" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="136" width="182" x="40.459999999999994" y="322.79999999999995" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;G1 off, Y1 on&#xa;load Y1_dur&#xa;&#xa;TICK_1s [Y1_timer &amp;gt; 0]/&#xa;Y1_dur--" plantUmlId="sdesc_9" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;G1 off, Y1 on&#xa;load Y1_dur&#xa;&#xa;TICK_1s [Y1_timer &amp;gt; 0]/&#xa;Y1_dur--" id="ic6Nao8f41JtbyAwe6FB-11">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-10" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="110" width="182" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="sc_10" plantUmlBaseStyle="ellipse;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="ic6Nao8f41JtbyAwe6FB-12">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-3" style="ellipse;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="20" width="20" x="20.459999999999994" y="32.8" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="t_13" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="ic6Nao8f41JtbyAwe6FB-15">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-3" source="ic6Nao8f41JtbyAwe6FB-12" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="ic6Nao8f41JtbyAwe6FB-4">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT /" plantUmlId="t_14" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT /" id="ic6Nao8f41JtbyAwe6FB-16">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-3" source="ic6Nao8f41JtbyAwe6FB-5" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ic6Nao8f41JtbyAwe6FB-7">
+            <mxGeometry relative="1" x="-0.8399" y="-2" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points" />
+              <mxPoint x="125.91" y="203.49" as="sourcePoint" />
+              <mxPoint x="111.46000000000001" y="301.1399999999999" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else]/" plantUmlId="t_17" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else]/" id="ic6Nao8f41JtbyAwe6FB-19">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-3" source="ic6Nao8f41JtbyAwe6FB-10" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="ic6Nao8f41JtbyAwe6FB-4">
+            <mxGeometry relative="1" x="0.1358" y="70" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="140" y="272.79999999999995" />
+                <mxPoint x="131.46" y="242.79999999999995" />
+                <mxPoint x="110" y="192.79999999999995" />
+              </Array>
+              <mxPoint x="235.95000000000002" y="680.8700000000001" as="sourcePoint" />
+              <mxPoint x="165.91" y="203.49" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="TICK_1S [else]/" plantUmlId="t_15" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="TICK_1S [else]/" id="ic6Nao8f41JtbyAwe6FB-17">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-3" source="ic6Nao8f41JtbyAwe6FB-6" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="ic6Nao8f41JtbyAwe6FB-8">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="440" y="232.79999999999995" />
+              </Array>
+              <mxPoint x="111.46000000000001" y="437.1400000000001" as="sourcePoint" />
+              <mxPoint x="130.15" y="518.56" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT /" plantUmlId="t_16" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT /" id="ic6Nao8f41JtbyAwe6FB-18">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-3" source="ic6Nao8f41JtbyAwe6FB-9" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="ic6Nao8f41JtbyAwe6FB-11">
+            <mxGeometry relative="1" x="0.6094" y="2" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="340" y="392.79999999999995" />
+              </Array>
+              <mxPoint x="130.15" y="590.56" as="sourcePoint" />
+              <mxPoint x="175.29" y="680.8700000000001" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="s_11" plantUmlBaseStyle="shape=endState;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="ic6Nao8f41JtbyAwe6FB-13">
+          <mxCell parent="ic6Nao8f41JtbyAwe6FB-1" style="shape=endState;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="24" width="24" x="570" y="229.9999999999999" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Mode change (button 1) from MODE_AUTO" plantUmlId="t_12" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Mode change (button 1) from MODE_AUTO" id="ic6Nao8f41JtbyAwe6FB-14">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-1" source="ic6Nao8f41JtbyAwe6FB-2" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ic6Nao8f41JtbyAwe6FB-3">
+            <mxGeometry relative="1" x="0.4685" y="9" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="240" y="70" />
+              </Array>
+              <mxPoint x="13.170000000000016" y="30" as="sourcePoint" />
+              <mxPoint x="18.310000000000002" y="107.20000000000005" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="Mode change (button 1) to MODE_SETTING" plantUmlId="t_18" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Mode change (button 1) to MODE_SETTING" id="ic6Nao8f41JtbyAwe6FB-20">
+          <mxCell edge="1" parent="ic6Nao8f41JtbyAwe6FB-1" source="ic6Nao8f41JtbyAwe6FB-3" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ic6Nao8f41JtbyAwe6FB-13">
+            <mxGeometry relative="1" x="-0.069" y="51" as="geometry">
+              <mxPoint x="1" as="offset" />
+              <Array as="points">
+                <mxPoint x="500" y="360" />
+              </Array>
+              <mxPoint x="18.310000000000002" y="944.0700000000002" as="sourcePoint" />
+              <mxPoint x="18.310000000000002" y="1020.0699999999999" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="X6UYumAQo777u_QGotO3" name="fsm_setting_uml">
-    <mxGraphModel dx="2001" dy="1156" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="3003" dy="1890" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="-rnKD2Yy6K8hjddKIVOf-2" edge="1" parent="1" source="6BT4bqK_bXJSVM-jY0uv-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=10;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="LtboQq3ds8YoFLxouSFg-2" value="MODE_CHANGE">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-1" parent="1" style="shape=mxgraph.sysml.compState;html=1;align=left;verticalAlign=top;spacingTop=-3;spacingLeft=18;" value="MODE_SETTING" vertex="1">
-          <mxGeometry height="950" width="920" x="-490" y="40" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-10" edge="1" parent="1" source="6BT4bqK_bXJSVM-jY0uv-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="6BT4bqK_bXJSVM-jY0uv-3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-11" parent="1" style="ellipse;fillColor=strokeColor;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="390" y="70" as="geometry" />
-        </mxCell>
-        <mxCell id="LtboQq3ds8YoFLxouSFg-1" parent="1" style="ellipse;fillColor=strokeColor;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="580" y="-20" as="geometry" />
-        </mxCell>
-        <mxCell id="LtboQq3ds8YoFLxouSFg-2" parent="1" style="ellipse;html=1;shape=endState;fillColor=strokeColor;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="580" y="90" as="geometry" />
-        </mxCell>
-        <mxCell id="MMVu7rkbEG5tzvgJMv62-2" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="360" width="390" x="20" y="120" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-7" connectable="0" parent="MMVu7rkbEG5tzvgJMv62-2" style="group" value="" vertex="1">
-          <mxGeometry height="360" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-7" parent="uuiyy2sA8neBV11mo1iq-7" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="Edit G1" vertex="1">
-          <mxGeometry height="360" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-2" parent="uuiyy2sA8neBV11mo1iq-7" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="INCREASE/&lt;div&gt;temp G1++; draft dur = temp G1;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.910000000000053" y="145.82999999999998" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-3" parent="uuiyy2sA8neBV11mo1iq-7" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="DECREASE/&lt;div&gt;temp G1--; draft dur = temp G1&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.910000000000053" y="209.57999999999998" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-4" parent="uuiyy2sA8neBV11mo1iq-7" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="CONFIRM/&lt;div&gt;temp R2 = temp Y1 + temp G1; curr cfg = temp cfg;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.910000000000053" y="266.25" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-5" parent="uuiyy2sA8neBV11mo1iq-7" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;Road_2 off, G1 on, active field = G1, temp cfg = curr cfg, draft dur = temp G1&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.51" width="358.18" x="15.910000000000053" y="26.25" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-6" parent="uuiyy2sA8neBV11mo1iq-7" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_250MS/&lt;div&gt;Toggle G1&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.50666666666666" width="358.18" x="15.910000000000053" y="93.7533333333333" as="geometry" />
-        </mxCell>
-        <mxCell id="MMVu7rkbEG5tzvgJMv62-4" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="360" width="390" x="-470" y="120" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-3" parent="MMVu7rkbEG5tzvgJMv62-4" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="Edit Y1" vertex="1">
-          <mxGeometry height="360" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="13JXce0vpWU1DRbBhJih-1" parent="MMVu7rkbEG5tzvgJMv62-4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="INCREASE/&lt;div&gt;temp Y1++; draft dur = temp Y1;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="11.82" y="146.25" as="geometry" />
-        </mxCell>
-        <mxCell id="13JXce0vpWU1DRbBhJih-2" parent="MMVu7rkbEG5tzvgJMv62-4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="DECREASE/&lt;div&gt;temp Y1--; draft dur = temp Y1&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="11.82" y="210" as="geometry" />
-        </mxCell>
-        <mxCell id="13JXce0vpWU1DRbBhJih-3" parent="MMVu7rkbEG5tzvgJMv62-4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="CONFIRM/&lt;div&gt;temp R2 = temp Y1 + temp G1; curr cfg = temp cfg;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="11.82" y="266.67" as="geometry" />
-        </mxCell>
-        <mxCell id="MMVu7rkbEG5tzvgJMv62-3" parent="MMVu7rkbEG5tzvgJMv62-4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;Road_2 off, Y1 on, active field = Y1, temp cfg = curr cfg, draft dur = temp Y1&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.51" width="358.18" x="11.82" y="26.67" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-1" parent="MMVu7rkbEG5tzvgJMv62-4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_250MS/&lt;div&gt;Toggle Y1&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.50666666666666" width="358.18" x="11.82" y="94.17333333333332" as="geometry" />
-        </mxCell>
-        <mxCell id="MMVu7rkbEG5tzvgJMv62-9" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="370" width="390" x="-470" y="600" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-23" connectable="0" parent="MMVu7rkbEG5tzvgJMv62-9" style="group" value="" vertex="1">
-          <mxGeometry height="370" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-5" parent="uuiyy2sA8neBV11mo1iq-23" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="Edit G2" vertex="1">
-          <mxGeometry height="370" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-18" parent="uuiyy2sA8neBV11mo1iq-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="INCREASE/&lt;div&gt;temp G2++; draft dur = temp G2;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.909999999999968" y="150.82999999999993" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-19" parent="uuiyy2sA8neBV11mo1iq-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="DECREASE/&lt;div&gt;temp G2--; draft dur = temp G2&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.909999999999968" y="214.57999999999993" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-20" parent="uuiyy2sA8neBV11mo1iq-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="CONFIRM/&lt;div&gt;temp R1 = temp Y2 + temp G2; curr cfg = temp cfg;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.909999999999968" y="271.25" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-21" parent="uuiyy2sA8neBV11mo1iq-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;Road_1 off, G2 on, active field = G2, temp cfg = curr cfg, draft dur = temp G2&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.51" width="358.18" x="15.909999999999968" y="31.25" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-22" parent="uuiyy2sA8neBV11mo1iq-23" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_250MS/&lt;div&gt;Toggle G2&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.50666666666666" width="358.18" x="15.909999999999968" y="98.75333333333333" as="geometry" />
-        </mxCell>
-        <mxCell id="MMVu7rkbEG5tzvgJMv62-14" connectable="0" parent="1" style="group" value="" vertex="1">
-          <mxGeometry height="370" width="390" x="20" y="600" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-17" connectable="0" parent="MMVu7rkbEG5tzvgJMv62-14" style="group" value="" vertex="1">
-          <mxGeometry height="370" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="6BT4bqK_bXJSVM-jY0uv-9" parent="uuiyy2sA8neBV11mo1iq-17" style="html=1;align=center;verticalAlign=top;rounded=1;absoluteArcSize=1;arcSize=10;dashed=0;whiteSpace=wrap;" value="Edit Y2" vertex="1">
-          <mxGeometry height="370" width="390" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-12" parent="uuiyy2sA8neBV11mo1iq-17" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="INCREASE/&lt;div&gt;temp Y2++; draft dur = temp Y2;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.909999999999997" y="150.82999999999993" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-13" parent="uuiyy2sA8neBV11mo1iq-17" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="DECREASE/&lt;div&gt;temp Y2--; draft dur = temp Y2&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.909999999999997" y="214.57999999999993" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-14" parent="uuiyy2sA8neBV11mo1iq-17" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="CONFIRM/&lt;div&gt;temp R1 = temp Y2 + temp G2; curr cfg = temp cfg;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.5" width="358.18" x="15.909999999999997" y="271.25" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-15" parent="uuiyy2sA8neBV11mo1iq-17" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="entry/&lt;div&gt;Road_1 off, Y2 on, active field = Y2, temp cfg = curr cfg, draft dur = temp Y2&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.51" width="358.18" x="15.909999999999997" y="31.25" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-16" parent="uuiyy2sA8neBV11mo1iq-17" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="TICK_250MS/&lt;div&gt;Toggle Y2&lt;/div&gt;" vertex="1">
-          <mxGeometry height="67.50666666666666" width="358.18" x="15.909999999999997" y="98.75333333333333" as="geometry" />
-        </mxCell>
-        <mxCell id="-rnKD2Yy6K8hjddKIVOf-1" edge="1" parent="1" source="LtboQq3ds8YoFLxouSFg-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=20;entryPerimeter=0;defaultLabelBackgroundColor=page;" target="6BT4bqK_bXJSVM-jY0uv-1" value="MODE_CHANGE from MODE_MANUAL">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-8" edge="1" parent="1" source="6BT4bqK_bXJSVM-jY0uv-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="6BT4bqK_bXJSVM-jY0uv-7" value="SWITCH_LIGHT/">
-          <mxGeometry relative="1" y="-20" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-9" edge="1" parent="1" source="6BT4bqK_bXJSVM-jY0uv-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="6BT4bqK_bXJSVM-jY0uv-9" value="SWITCH_LIGHT/">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-10" edge="1" parent="1" source="6BT4bqK_bXJSVM-jY0uv-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="6BT4bqK_bXJSVM-jY0uv-5" value="SWITCH_LIGHT/">
-          <mxGeometry relative="1" y="15" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="uuiyy2sA8neBV11mo1iq-11" edge="1" parent="1" source="6BT4bqK_bXJSVM-jY0uv-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;" target="6BT4bqK_bXJSVM-jY0uv-3">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\n[*] --&gt; MODE_SETTING : MODE_CHANGE from MODE_MANUAL\n\nstate MODE_SETTING {\n  state \&quot;Edit R1\&quot; as Edit_R1\n  state \&quot;Edit Y1\&quot; as Edit_Y1\n  state \&quot;Edit G1\&quot; as Edit_G1\n  state \&quot;Edit R2\&quot; as Edit_R2\n  state \&quot;Edit Y2\&quot; as Edit_Y2\n  state \&quot;Edit G2\&quot; as Edit_G2\n\n  [*] --&gt; Edit_R1\n\n  Edit_R1 : entry/\n  Edit_R1 : Road_2 off, R1 on, active field = R1, temp cfg = curr cfg, draft dur = temp R1\n  Edit_R1 :\n  Edit_R1 : TICK_250MS/\n  Edit_R1 : Toggle R1\n  Edit_R1 :\n  Edit_R1 : INCREASE/\n  Edit_R1 : temp R1++; draft dur = temp R1;\n  Edit_R1 :\n  Edit_R1 : DECREASE/\n  Edit_R1 : temp R1--; draft dur = temp R1\n  Edit_R1 :\n  Edit_R1 : CONFIRM/\n  Edit_R1 : temp cfg.R1 = draft dur;\n\n  Edit_Y1 : entry/\n  Edit_Y1 : Road_2 off, Y1 on, active field = Y1, temp cfg = curr cfg, draft dur = temp Y1\n  Edit_Y1 :\n  Edit_Y1 : TICK_250MS/\n  Edit_Y1 : Toggle Y1\n  Edit_Y1 :\n  Edit_Y1 : INCREASE/\n  Edit_Y1 : temp Y1++; draft dur = temp Y1;\n  Edit_Y1 :\n  Edit_Y1 : DECREASE/\n  Edit_Y1 : temp Y1--; draft dur = temp Y1\n  Edit_Y1 :\n  Edit_Y1 : CONFIRM/\n  Edit_Y1 : temp cfg.Y1 = draft dur;\n\n  Edit_G1 : entry/\n  Edit_G1 : Road_2 off, G1 on, active field = G1, temp cfg = curr cfg, draft dur = temp G1\n  Edit_G1 :\n  Edit_G1 : TICK_250MS/\n  Edit_G1 : Toggle G1\n  Edit_G1 :\n  Edit_G1 : INCREASE/\n  Edit_G1 : temp G1++; draft dur = temp G1;\n  Edit_G1 :\n  Edit_G1 : DECREASE/\n  Edit_G1 : temp G1--; draft dur = temp G1\n  Edit_G1 :\n  Edit_G1 : CONFIRM/\n  Edit_G1 : temp cfg.G1 = draft dur;\n\n  Edit_R2 : entry/\n  Edit_R2 : Road_1 off, R2 on, active field = R2, temp cfg = curr cfg, draft dur = temp R2\n  Edit_R2 :\n  Edit_R2 : TICK_250MS/\n  Edit_R2 : Toggle R2\n  Edit_R2 :\n  Edit_R2 : INCREASE/\n  Edit_R2 : temp R2++; draft dur = temp R2;\n  Edit_R2 :\n  Edit_R2 : DECREASE/\n  Edit_R2 : temp R2--; draft dur = temp R2\n  Edit_R2 :\n  Edit_R2 : CONFIRM/\n  Edit_R2 : temp cfg.R2 = draft dur;\n\n  Edit_Y2 : entry/\n  Edit_Y2 : Road_1 off, Y2 on, active field = Y2, temp cfg = curr cfg, draft dur = temp Y2\n  Edit_Y2 :\n  Edit_Y2 : TICK_250MS/\n  Edit_Y2 : Toggle Y2\n  Edit_Y2 :\n  Edit_Y2 : INCREASE/\n  Edit_Y2 : temp Y2++; draft dur = temp Y2;\n  Edit_Y2 :\n  Edit_Y2 : DECREASE/\n  Edit_Y2 : temp Y2--; draft dur = temp Y2\n  Edit_Y2 :\n  Edit_Y2 : CONFIRM/\n  Edit_Y2 : temp cfg.Y2 = draft dur;\n\n  Edit_G2 : entry/\n  Edit_G2 : Road_1 off, G2 on, active field = G2, temp cfg = curr cfg, draft dur = temp G2\n  Edit_G2 :\n  Edit_G2 : TICK_250MS/\n  Edit_G2 : Toggle G2\n  Edit_G2 :\n  Edit_G2 : INCREASE/\n  Edit_G2 : temp G2++; draft dur = temp G2;\n  Edit_G2 :\n  Edit_G2 : DECREASE/\n  Edit_G2 : temp G2--; draft dur = temp G2\n  Edit_G2 :\n  Edit_G2 : CONFIRM/\n  Edit_G2 : temp cfg.G2 = draft dur;\n\n  Edit_R1 --&gt; Edit_Y1 : SWITCH_LIGHT/\n  Edit_Y1 --&gt; Edit_G1 : SWITCH_LIGHT/\n  Edit_G1 --&gt; Edit_R2 : SWITCH_LIGHT/\n  Edit_R2 --&gt; Edit_Y2 : SWITCH_LIGHT/\n  Edit_Y2 --&gt; Edit_G2 : SWITCH_LIGHT/\n  Edit_G2 --&gt; Edit_R1 : SWITCH_LIGHT/\n}\n\nMODE_SETTING --&gt; [*] : MODE_CHANGE [temp R2 == temp G1 + temp Y1 &amp;&amp; temp R1 == temp G2 + temp Y2] / curr cfg = temp cfg\nMODE_SETTING --&gt; [*] : MODE_CHANGE [else] /\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="SEesWlZide1QGiZT6AZx-28">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="s_0" plantUmlBaseStyle="ellipse;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="SEesWlZide1QGiZT6AZx-29">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-28" style="ellipse;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="20" width="20" x="1470" y="400" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MODE_SETTING" plantUmlId="s_1" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;fillColor=#F1F1F1;swimlaneFillColor=#FFFFFF;strokeColor=#181818;strokeWidth=0.5;rounded=1;absoluteArcSize=1;arcSize=25;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;" plantUmlBaseValue="MODE_SETTING" id="SEesWlZide1QGiZT6AZx-30">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-28" style="swimlane;collapsible=0;startSize=26;fillColor=#F1F1F1;swimlaneFillColor=#FFFFFF;strokeColor=#181818;strokeWidth=0.5;rounded=1;absoluteArcSize=1;arcSize=25;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;" vertex="1">
+            <mxGeometry height="1133.73" width="1220" x="30" y="486.27" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Edit R1" plantUmlId="sc_2" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Edit R1" id="SEesWlZide1QGiZT6AZx-31">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="276.27" width="500" x="20" y="113.73" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Road_2 off, R1 on, active field = R1, temp cfg = curr cfg, draft dur = temp R1&#xa;&#xa;TICK_250MS/&#xa;Toggle R1&#xa;&#xa;INCREASE/&#xa;temp R1++; draft dur = temp R1;&#xa;&#xa;DECREASE/&#xa;temp R1--; draft dur = temp R1&#xa;&#xa;CONFIRM/&#xa;temp cfg.R1 = draft dur;" plantUmlId="sdesc_3" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Road_2 off, R1 on, active field = R1, temp cfg = curr cfg, draft dur = temp R1&#xa;&#xa;TICK_250MS/&#xa;Toggle R1&#xa;&#xa;INCREASE/&#xa;temp R1++; draft dur = temp R1;&#xa;&#xa;DECREASE/&#xa;temp R1--; draft dur = temp R1&#xa;&#xa;CONFIRM/&#xa;temp cfg.R1 = draft dur;" id="SEesWlZide1QGiZT6AZx-32">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-31" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="490" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Edit Y1" plantUmlId="sc_4" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Edit Y1" id="SEesWlZide1QGiZT6AZx-33">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="276.27" width="500" x="20" y="453.73" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Road_2 off, Y1 on, active field = Y1, temp cfg = curr cfg, draft dur = temp Y1&#xa;&#xa;TICK_250MS/&#xa;Toggle Y1&#xa;&#xa;INCREASE/&#xa;temp Y1++; draft dur = temp Y1;&#xa;&#xa;DECREASE/&#xa;temp Y1--; draft dur = temp Y1&#xa;&#xa;CONFIRM/&#xa;temp cfg.Y1 = draft dur;" plantUmlId="sdesc_5" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Road_2 off, Y1 on, active field = Y1, temp cfg = curr cfg, draft dur = temp Y1&#xa;&#xa;TICK_250MS/&#xa;Toggle Y1&#xa;&#xa;INCREASE/&#xa;temp Y1++; draft dur = temp Y1;&#xa;&#xa;DECREASE/&#xa;temp Y1--; draft dur = temp Y1&#xa;&#xa;CONFIRM/&#xa;temp cfg.Y1 = draft dur;" id="SEesWlZide1QGiZT6AZx-34">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-33" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="550" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Edit G1" plantUmlId="sc_6" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Edit G1" id="SEesWlZide1QGiZT6AZx-35">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="276.27" width="500" x="20" y="803.73" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Road_2 off, G1 on, active field = G1, temp cfg = curr cfg, draft dur = temp G1&#xa;&#xa;TICK_250MS/&#xa;Toggle G1&#xa;&#xa;INCREASE/&#xa;temp G1++; draft dur = temp G1;&#xa;&#xa;DECREASE/&#xa;temp G1--; draft dur = temp G1&#xa;&#xa;CONFIRM/&#xa;temp cfg.G1 = draft dur;" plantUmlId="sdesc_7" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Road_2 off, G1 on, active field = G1, temp cfg = curr cfg, draft dur = temp G1&#xa;&#xa;TICK_250MS/&#xa;Toggle G1&#xa;&#xa;INCREASE/&#xa;temp G1++; draft dur = temp G1;&#xa;&#xa;DECREASE/&#xa;temp G1--; draft dur = temp G1&#xa;&#xa;CONFIRM/&#xa;temp cfg.G1 = draft dur;" id="SEesWlZide1QGiZT6AZx-36">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-35" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="554" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Edit R2" plantUmlId="sc_8" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Edit R2" id="SEesWlZide1QGiZT6AZx-37">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="276.27" width="500" x="700" y="803.73" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Road_1 off, R2 on, active field = R2, temp cfg = curr cfg, draft dur = temp R2&#xa;&#xa;TICK_250MS/&#xa;Toggle R2&#xa;&#xa;INCREASE/&#xa;temp R2++; draft dur = temp R2;&#xa;&#xa;DECREASE/&#xa;temp R2--; draft dur = temp R2&#xa;&#xa;CONFIRM/&#xa;temp cfg.R2 = draft dur;" plantUmlId="sdesc_9" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Road_1 off, R2 on, active field = R2, temp cfg = curr cfg, draft dur = temp R2&#xa;&#xa;TICK_250MS/&#xa;Toggle R2&#xa;&#xa;INCREASE/&#xa;temp R2++; draft dur = temp R2;&#xa;&#xa;DECREASE/&#xa;temp R2--; draft dur = temp R2&#xa;&#xa;CONFIRM/&#xa;temp cfg.R2 = draft dur;" id="SEesWlZide1QGiZT6AZx-38">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-37" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="490" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Edit Y2" plantUmlId="sc_10" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Edit Y2" id="SEesWlZide1QGiZT6AZx-39">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="276.27" width="500" x="700" y="453.73" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Road_1 off, Y2 on, active field = Y2, temp cfg = curr cfg, draft dur = temp Y2&#xa;&#xa;TICK_250MS/&#xa;Toggle Y2&#xa;&#xa;INCREASE/&#xa;temp Y2++; draft dur = temp Y2;&#xa;&#xa;DECREASE/&#xa;temp Y2--; draft dur = temp Y2&#xa;&#xa;CONFIRM/&#xa;temp cfg.Y2 = draft dur;" plantUmlId="sdesc_11" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Road_1 off, Y2 on, active field = Y2, temp cfg = curr cfg, draft dur = temp Y2&#xa;&#xa;TICK_250MS/&#xa;Toggle Y2&#xa;&#xa;INCREASE/&#xa;temp Y2++; draft dur = temp Y2;&#xa;&#xa;DECREASE/&#xa;temp Y2--; draft dur = temp Y2&#xa;&#xa;CONFIRM/&#xa;temp cfg.Y2 = draft dur;" id="SEesWlZide1QGiZT6AZx-40">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-39" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="490" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Edit G2" plantUmlId="sc_12" plantUmlBaseStyle="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" plantUmlBaseValue="Edit G2" id="SEesWlZide1QGiZT6AZx-41">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="swimlane;collapsible=0;startSize=26;whiteSpace=wrap;align=center;html=1;fontSize=14;fontStyle=0;rounded=1;absoluteArcSize=1;arcSize=25;fillColor=#F1F1F1;swimlaneFillColor=#F1F1F1;strokeColor=#181818;strokeWidth=0.5;" vertex="1">
+            <mxGeometry height="276.27" width="500" x="700" y="113.73" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="entry/&#xa;Road_1 off, G2 on, active field = G2, temp cfg = curr cfg, draft dur = temp G2&#xa;&#xa;TICK_250MS/&#xa;Toggle G2&#xa;&#xa;INCREASE/&#xa;temp G2++; draft dur = temp G2;&#xa;&#xa;DECREASE/&#xa;temp G2--; draft dur = temp G2&#xa;&#xa;CONFIRM/&#xa;temp cfg.G2 = draft dur;" plantUmlId="sdesc_13" plantUmlBaseStyle="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" plantUmlBaseValue="entry/&#xa;Road_1 off, G2 on, active field = G2, temp cfg = curr cfg, draft dur = temp G2&#xa;&#xa;TICK_250MS/&#xa;Toggle G2&#xa;&#xa;INCREASE/&#xa;temp G2++; draft dur = temp G2;&#xa;&#xa;DECREASE/&#xa;temp G2--; draft dur = temp G2&#xa;&#xa;CONFIRM/&#xa;temp cfg.G2 = draft dur;" id="SEesWlZide1QGiZT6AZx-42">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-41" style="text;align=left;verticalAlign=top;spacingLeft=3;spacingTop=-1;whiteSpace=wrap;fillColor=none;strokeColor=none;html=1;fontSize=14;" vertex="1">
+            <mxGeometry height="238" width="490" y="26" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="sc_14" plantUmlBaseStyle="ellipse;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="SEesWlZide1QGiZT6AZx-43">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-30" style="ellipse;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="20" width="20" x="20" y="46" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="t_17" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="SEesWlZide1QGiZT6AZx-46">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-43" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="SEesWlZide1QGiZT6AZx-31">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT/" plantUmlId="t_18" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT/" id="SEesWlZide1QGiZT6AZx-47">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-31" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="SEesWlZide1QGiZT6AZx-33">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="336.48999999999995" y="453.40999999999997" />
+              </Array>
+              <mxPoint x="336.48999999999995" y="401.68000000000006" as="sourcePoint" />
+              <mxPoint x="295" y="509.09000000000003" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT/" plantUmlId="t_23" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT/" id="SEesWlZide1QGiZT6AZx-52">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-42" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="SEesWlZide1QGiZT6AZx-31">
+            <mxGeometry relative="1" x="0.4423" y="5" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points" />
+              <mxPoint x="593.92" y="1904.92" as="sourcePoint" />
+              <mxPoint x="460" y="393.73" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT/" plantUmlId="t_19" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT/" id="SEesWlZide1QGiZT6AZx-48">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-33" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="SEesWlZide1QGiZT6AZx-35">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="297" y="803.56" />
+              </Array>
+              <mxPoint x="295" y="773.0900000000001" as="sourcePoint" />
+              <mxPoint x="297" y="849.56" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT/" plantUmlId="t_20" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT/" id="SEesWlZide1QGiZT6AZx-49">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-35" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="SEesWlZide1QGiZT6AZx-38">
+            <mxGeometry relative="1" x="-0.5512" y="-10" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points" />
+              <mxPoint x="297" y="1113.56" as="sourcePoint" />
+              <mxPoint x="330.58" y="1199.76" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT/" plantUmlId="t_21" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT/" id="SEesWlZide1QGiZT6AZx-50">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-37" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="SEesWlZide1QGiZT6AZx-39">
+            <mxGeometry relative="1" x="-0.2147" y="15.24" as="geometry">
+              <Array as="points" />
+              <mxPoint x="330.58" y="1463.76" as="sourcePoint" />
+              <mxPoint x="330.58" y="1539.76" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="SWITCH_LIGHT/" plantUmlId="t_22" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="SWITCH_LIGHT/" id="SEesWlZide1QGiZT6AZx-51">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-30" source="SEesWlZide1QGiZT6AZx-39" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="SEesWlZide1QGiZT6AZx-41">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points" />
+              <mxPoint x="330.58" y="1803.7599999999998" as="sourcePoint" />
+              <mxPoint x="409.25" y="1904.92" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="s_15" plantUmlBaseStyle="shape=endState;fillColor=#222222;strokeColor=#222222;" plantUmlBaseValue="" id="SEesWlZide1QGiZT6AZx-44">
+          <mxCell parent="SEesWlZide1QGiZT6AZx-28" style="shape=endState;fillColor=#222222;strokeColor=#222222;" vertex="1">
+            <mxGeometry height="24" width="24" x="1510" y="486.26999999999975" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="MODE_CHANGE from MODE_MANUAL" plantUmlId="t_16" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="MODE_CHANGE from MODE_MANUAL" id="SEesWlZide1QGiZT6AZx-45">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-28" source="SEesWlZide1QGiZT6AZx-29" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="SEesWlZide1QGiZT6AZx-30">
+            <mxGeometry relative="1" x="0.3666" y="10" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="1000" y="410" />
+              </Array>
+              <mxPoint x="385.29999999999995" y="400" as="sourcePoint" />
+              <mxPoint x="429.28999999999996" y="486.27" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="MODE_CHANGE [temp R2 == temp G1 + temp Y1&amp;nbsp;&lt;div&gt;&amp;amp;&amp;amp; temp R1 == temp G2 + temp Y2] /&amp;nbsp;&lt;/div&gt;&lt;div&gt;curr cfg = temp cfg&lt;/div&gt;" plantUmlId="t_24" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="MODE_CHANGE [temp R2 == temp G1 + temp Y1 &amp;&amp; temp R1 == temp G2 + temp Y2] / curr cfg = temp cfg" id="SEesWlZide1QGiZT6AZx-53">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-28" source="SEesWlZide1QGiZT6AZx-30" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="SEesWlZide1QGiZT6AZx-44">
+            <mxGeometry relative="1" x="-0.3034" y="79" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="1370" y="830" />
+              </Array>
+              <mxPoint x="1270" y="900" as="sourcePoint" />
+              <mxPoint x="529.8299999999999" y="2805.7" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="MODE_CHANGE [else] /" plantUmlId="t_25" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="MODE_CHANGE [else] /" id="SEesWlZide1QGiZT6AZx-54">
+          <mxCell edge="1" parent="SEesWlZide1QGiZT6AZx-28" source="SEesWlZide1QGiZT6AZx-30" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=13;html=1;rounded=0;labelPosition=right;align=left;curved=1;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" target="SEesWlZide1QGiZT6AZx-44">
+            <mxGeometry relative="1" x="-0.2077" y="31" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="1320" y="630" />
+              </Array>
+              <mxPoint x="1270" y="560" as="sourcePoint" />
+              <mxPoint x="537.8299999999999" y="2805.7" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="CZSEAcwwvwWIOpGeLT7z" name="Page-7">
+    <mxGraphModel grid="1" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
